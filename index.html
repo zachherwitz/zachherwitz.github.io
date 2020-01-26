@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Zach's Site</title>
-  </head>
-  <body>
-  	<h1>Hello World!</h1>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="resources/css/style.css">
+  <script rel="text/javascript" src="resources/js/judge.js"></script>
+  <title>Judge Game</title>
+</head>
+<body>
+  <div class="judge-photo-container">
+    <img id="judge-photo" src="resources/images/judge-judy.jpeg" alt="Judge Photo Here">
+  </div>
+  <button onclick="playGame()" id="start-button">Start Game</button>
+  <div class="judge-status-box">
+    <p id="judge-text"></p>
+  </div>
+  <div class="player-status-box">
+    <p id="player-text"></p>
+  </div>
+  <div id="button-container">
+    <button onclick="attack()" id="attack-button">Attack</button>
+    <button onclick="defend()" id="defend-button">Defend</button>
+    <button onclick="pass()" id="pass-button">Pass</button>
+  </div>
+  <div id="recap-container">
+    <p id="recap-text"></p>
+  </div>
+</body>
 </html>

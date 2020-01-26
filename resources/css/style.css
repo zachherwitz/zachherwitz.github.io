@@ -1,0 +1,16 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: Georgia, serif;
+}
+
+#button-container {
+  display: none;
+}
+
+#judge-photo {
+  max-width: 20%;
+  max-height: 20%;
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
