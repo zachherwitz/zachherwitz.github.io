@@ -127,15 +127,6 @@ const playGame = () => {
 	setButtonDisplay();
 	return currentJudge;
 	
-	
-	//For Node Testing
-	/*console.log('-------------NEW GAME-------------')
-	console.log(`Your opponent is ${currentJudge.name}, from ${currentJudge.homeState}.
-You are battling for the future of the ${currentJudge.circuitCourt} court.
-${currentJudge.name}'s Health Remaining: ${currentJudge.healthPoints}.
-${player.name}'s Health Remaining: ${player.healthPoints}
-Attack: Y/N`);*/
-
 }
 
 const attack = currentJudge => {
