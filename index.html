@@ -4,10 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="resources/landingpage/css/style.css" type="text/css">
-  <title>Zach's Website</title>
+  <title>Friend Counter</title>
+  <link rel="stylesheet" type="text/css" href="resources/css/style.css">
+  <script type="text/javascript" src="resources/js/friendGame.js"></script>
 </head>
 <body>
-  <p>Hello World</p>
+  <div class="age-container">
+    <p id="age-counter">Age Counter</p>
+  </div>
+  <div class="friend-container">
+    <p id ="friend-counter">Friend Counter</p>
+  </div>
+  <button onclick="increaseFriendCount()" id="friend-button"></button>
+  <br>
+  <br>
+  <button onclick="startGame()" id="start-button">Start Button</button>
+  <div class="lose-text-container">
+    <p id="lose-text"></p>
+  </div>
+  <button onclick="window.location.reload()" id="restart-button">Start Over</button>
+  <div id="random-event-container" class="random-event-container">
+    <p id="random-event-text">Random Events Go Here</p>
+    <button id="random-event-button-accept"></button>
+    <button id="random-event-button-decline"></button>
+    <img id="random-event-image" src="">
+  </div>
+  
 </body>
 </html>
