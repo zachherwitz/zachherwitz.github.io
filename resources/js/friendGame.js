@@ -95,7 +95,7 @@ class RandomEvent3 extends RandomEvent {
     super({
       eventName: 'HotTake', 
       eventText: 'You have a hot take on a spicy political issue. Do you post on social media?',
-      imgsrc: 'resources/images/hottake.jpeg'});
+      imgsrc: 'resources/images/hottake.png'});
   }
 
   accept() {
