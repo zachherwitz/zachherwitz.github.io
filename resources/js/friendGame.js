@@ -67,7 +67,7 @@ class RandomEvent1 extends RandomEvent {
     super({
       eventName: 'Wedding', 
       eventText: 'You are about to get married. Invite your college friends?',
-      imgsrc: 'resources/images/wedding.jpeg'});
+      imgsrc: 'resources/images/marriage.jpeg'});
   }
 
   accept() {
