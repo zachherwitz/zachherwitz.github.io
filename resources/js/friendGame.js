@@ -18,6 +18,7 @@ let randomEventTextElement;
 let randomEventButtonAcceptElement;
 let randomEventButtonDeclineElement;
 let randomEventImageElement;
+let instructionsElement;
 
 // Made a variable to control the rate at which you can lose friends
 let losingFriendsRate = 500;
@@ -123,12 +124,16 @@ const startGame = () => {
   randomEventButtonAcceptElement = document.getElementById('random-event-button-accept');
   randomEventButtonDeclineElement = document.getElementById('random-event-button-decline');
   randomEventImageElement = document.getElementById('random-event-image');
+  instructionsElement = document.getElementById('instructions');
 
   console.log('Starting Game!')
   
   // Hide Start Button on Game Start
   startButtonElement.style.display = 'none';
   
+  // Hide instructions on Game Start
+instructionsElement.style.display = 'none';
+
   // Show Friend Button on Game Start
   friendButtonElement.style.display = 'block';
   friendButtonElement.innerHTML = 'Click Here to Make Friends!'

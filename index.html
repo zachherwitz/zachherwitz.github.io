@@ -9,11 +9,24 @@
   <script type="text/javascript" src="resources/js/friendGame.js"></script>
 </head>
 <body>
+  <div class="instructions-container">
+    <p id="instructions">
+      Friend Game!
+      <br>
+      Click the button to start the game. 
+      <br>
+      Once the game begins, click the 'Friend' button to make friends!
+      <br>
+      Careful, it is difficult to make friends after a certain age.
+      <br>
+      Once you run out of friends, you die!
+    </p>
+  </div>
   <div class="age-container">
-    <p id="age-counter">Age Counter</p>
+    <p id="age-counter"></p>
   </div>
   <div class="friend-container">
-    <p id ="friend-counter">Friend Counter</p>
+    <p id ="friend-counter"></p>
   </div>
   <button onclick="increaseFriendCount()" id="friend-button"></button>
   <br>
