@@ -1,0 +1,35 @@
+#game-title {
+  font-family: 'Comic Sans MS', sans-serif;
+  text-align: center;
+}
+
+#game-container {
+  display: inline-block;
+  background-color: lightblue;
+  height: 500px;
+  width: 800px;
+}
+
+#random-event-text {
+  display: inline-block;
+}
+
+#friend-button {
+  display: none;
+}
+
+#restart-button {
+  display: none;
+}
+
+#random-event-text {
+  display: none;
+}
+
+#random-event-button-accept {
+  display: none;
+}
+
+#random-event-button-decline {
+  display: none;
+}

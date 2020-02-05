@@ -5,7 +5,8 @@ let loseStatus = false;
 let winStatus = false;
 let friendLossRate = 500;
 let peakAge = 20;
-let randomAge;
+let randomAgeOne;
+let randomAgeTwo;
 
 // Set Up Global HTML Elements
 let startButtonElement;
@@ -72,7 +73,7 @@ class RandomEvent1 extends RandomEvent {
   }
 
   accept() {
-    friendCount += 25;
+    friendCount += 15;
     super.accept();
   }
 }
@@ -86,7 +87,7 @@ class RandomEvent2 extends RandomEvent {
   }
 
   accept() {
-    friendCount += 200;
+    friendCount += 25;
     super.accept();
   }
 }
@@ -96,14 +97,15 @@ class RandomEvent3 extends RandomEvent {
     super({
       eventName: 'HotTake', 
       eventText: 'You have a hot take on a spicy political issue. Do you post on social media?',
-      imgsrc: 'resources/images/hottake.png'});
+      imgsrc: 'resources/images/hottake.jpeg'});
   }
 
   accept() {
-    friendCount -= 15;
+    friendCount -= 10;
     super.accept();
   }
 }
+
 
 // Testing Random Event Creation and Array
 const randomEventArray = [new RandomEvent1(), new RandomEvent2(), new RandomEvent3()];
@@ -139,8 +141,10 @@ instructionsElement.style.display = 'none';
   friendButtonElement.innerHTML = 'Click Here to Make Friends!'
  
   // Set Random Age
-  randomAge = Math.floor(Math.random() * 20) + 25;
-  console.log(randomAge);
+  randomAgeOne = Math.floor(Math.random() * 10) + 25;
+  randomAgeTwo = Math.floor(Math.random() * 10) + 60;
+  console.log(randomAgeOne);
+  console.log(randomAgeTwo)
 
   // Set Up friendCount
   friendCounterElement.innerHTML = `Friends: ${friendCount}`;
@@ -198,7 +202,7 @@ const incrementAge = () => {
   };
   ageCounterElement.innerHTML = `Age: ${age}`;
 
-  if(age === randomAge) {
+  if(age === randomAgeOne || age === randomAgeTwo) {
     isPaused = true;
     console.log('Pausing Game Now')
     randomEvent();
