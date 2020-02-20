@@ -1,61 +1,72 @@
-// Create and Set Element Variables
+// DOM Element Variables
 let visitorIDElement;
 let visitorTimerElement;
+let gameOverElement;
+let callListElement;
+let dialogueBoxElement;
+let textContainerElement;
+let pointsElement;
+let clockElement;
+
+// DOM Element Variables - Buttons
 let startButtonElement;
 let acceptButtonElement;
 let declineButtonElement;
-let pointsElement;
+let listButtonElement;
+
+// Points Related Variables
 let pointsCount = 50;
+
+// Variables
 let newVisitor;
-let clockElement;
 let visitorIndex;
 let timeInHours;
 let visitorTimer;
 let visitorTimerInterval;
-let gameoverElement;
-let callListElement;
+let morningList;
+let randomBool;
+
+// Visitor Arrays
 let visitorVIPLog = [];
 let visitorBlacklistLog = [];
 let visitorExpectedLog = [];
 let visitorUnexpectedLog = [];
-let morningList;
-let randomBool;
 
 // Create Time Counter
 let clockCount = 0;
 
 // Visitor Class
 class Visitor {
-  constructor(name, id, waitTime, expectedBool, vipBool, blacklistBool) {
+  constructor(name, waitTime, expectedBool, vipBool, blacklistBool) {
     this.name = name;
-    this.id = id;
     this.waitTime = waitTime;
     this.expectedBool = expectedBool;
     this.vipBool = vipBool;
     this.blacklistBool = blacklistBool;
-  } 
-}
+  };
+};
 
 // Create List of Visitors
-const zoraMoncada = new Visitor("Zora Moncada", 1, 10, true, true, false)
-const willisHayter = new Visitor("Willis Hayter", 2, 10, true, false, false)
-const tamalaHaberle = new Visitor("Tamala Haberle", 3, 10, true, true, false);
-const katelynTinkham = new Visitor("Katelyn Tinkham", 4, 10, true, false, true);
-const divinaLeon = new Visitor("Divina Leon", 5, 10, true, false, false);
-const leonaraShambo = new Visitor("Leonora Shambo", 6, 10, true, false, false);
-const danieleCerrone = new Visitor("Daniele Cerrone", 7, 10, true, false, false);
-const hsiuBarnette = new Visitor("Hsiu Barnette", 8, 10, true, true, false);
-const christopherMacgillivray = new Visitor("Christoper Macgillivray", 9, 10, true, false, false);
-const caridadVince = new Visitor("Caridad Vince", 10, 10, true, false, true);
-const jessicaWeaver = new Visitor("Jessica Weaver", 10, 10, true, false, true);
-const jadynWarren = new Visitor("Jadyn Warren", 10, 10, true, false, true);
-const karlieFirecross = new Visitor("Karlie Firecross", 10, 10, true, false, true);
-const julianHerwitz = new Visitor("Julian Herwitz", 10, 10, true, false, true);
-const zachHerwitz = new Visitor("Zach Herwitz", 10, 10, true, false, true); 
+const zoraMoncada = new Visitor("Zora Moncada", 6, true, true, false)
+const willisHayter = new Visitor("Willis Hayter", 6, true, false, false)
+const tamalaHaberle = new Visitor("Tamala Haberle", 6, true, true, false);
+const katelynTinkham = new Visitor("Katelyn Tinkham", 6, true, false, true);
+const divinaLeon = new Visitor("Divina Leon", 6, true, false, false);
+const leonaraShambo = new Visitor("Leonora Shambo", 6, true, false, false);
+const danieleCerrone = new Visitor("Daniele Cerrone", 6, true, false, false);
+const hsiuBarnette = new Visitor("Hsiu Barnette", 6, true, true, false);
+const christopherMacgillivray = new Visitor("Christoper Macgillivray", 6, true, false, false);
+const caridadVince = new Visitor("Caridad Vince", 6, true, false, true);
+const jessicaWeaver = new Visitor("Jessica Weaver", 6, true, false, true);
+const jadynWarren = new Visitor("Jadyn Warren", 6, true, false, true);
+const karlieFirecross = new Visitor("Karlie Firecross", 6, true, false, true);
+const julianHerwitz = new Visitor("Julian Herwitz", 6, true, false, true);
+const zachHerwitz = new Visitor("Zach Herwitz", 6, true, false, true); 
 
 const visitorArray = [zoraMoncada, willisHayter, tamalaHaberle, katelynTinkham, divinaLeon, leonaraShambo, danieleCerrone, hsiuBarnette, christopherMacgillivray, caridadVince, jessicaWeaver, jadynWarren, karlieFirecross, julianHerwitz, zachHerwitz];
 
 // Timer Function
+// TODO: Make this better lol
 const tick = () => {
   console.log('Tick Tock')
   clockCount++;
@@ -112,10 +123,10 @@ const tick = () => {
     timeInHours = '7:00 PM';
   } else {
     timeInHours = 'Into Overtime';
-  }
+  };
 
   clockElement.innerHTML = `Time: ${timeInHours}`;
-}
+};
 
 // Shuffle Array
 // https://gomakethings.com/how-to-shuffle-an-array-with-vanilla-js/
@@ -134,39 +145,44 @@ const shuffle = array => {
 		temporaryValue = array[currentIndex];
 		array[currentIndex] = array[randomIndex];
 		array[randomIndex] = temporaryValue;
-	}
-
+	};
 	return array;
-
 };
 
-// Set Elements and UI
+// Set Game UI
 const setElement = () => {
-	callListElement.style.display = 'none';
+  callListElement.style.display = 'none';
+
   visitorIDElement = document.getElementById('visitor-id');
   visitorTimerElement = document.getElementById('visitor-timer')
   acceptButtonElement = document.getElementById('accept-button');
   declineButtonElement = document.getElementById('decline-button');
+  listButtonElement = document.getElementById('list-button')
   pointsElement = document.getElementById('points');
 	clockElement = document.getElementById('timer');
-	gameoverElement = document.getElementById('gameover');
+  gameoverElement = document.getElementById('gameover');
+  textContainerElement = document.getElementById('text-container');
 
   pointsElement.innerHTML = 'Job Performance: ' + pointsCount + '%';
   clockElement.innerHTML = 'Time: 7:00 AM';
 };
 
+// End Game UI
 const endGame = () => {
 	visitorIDElement.style.display = 'none';
   visitorTimerElement.style.display = 'none';
   startButtonElement.style.display = 'none';
   acceptButtonElement.style.display = 'none';
+  listButtonElement.style.display = 'none';
   declineButtonElement.style.display = 'none';
   pointsElement.style.display = 'none';
-	clockElement.style.display = 'none';
+  clockElement.style.display = 'none';
+  textContainerElement.style.display = 'none';
 	
 	gameoverElement.style.display = 'block';
-}
+};
 
+// Set Timed Coutdown for Visitor
 const setVisitorTimer = () => {
   visitorTimer = newVisitor.waitTime;
   visitorTimerInterval = setInterval(function() {
@@ -177,36 +193,41 @@ const setVisitorTimer = () => {
       clearInterval(visitorTimerInterval);
       console.log(newVisitor.name + ' has left');
       pointsCount -= 10;
-			pointsElement.innerHTML = 'Job Performance: ' + pointsCount + '%';
-			if(pointsCount <= 0) {
+      pointsElement.innerHTML = 'Job Performance: ' + pointsCount + '%';
+      acceptButtonElement.style.display = 'none';
+      declineButtonElement.style.display = 'none';
+      listButtonElement.style.display = 'none';
+      if(pointsCount <= 0) {
 				endGame();
-			}
+			};
       nextVisitorDelay();
     };
   }, 500);
-}
+};
 
-// Grabs new Visitor from visitorArray
-
+// Pull Next Visitor from visitorArray
 const nextVisitor = () => {
 	if(visitorArray.length) {
   	newVisitor = visitorArray[0];
 		
 		acceptButtonElement.style.display = 'inline-block';  
-		declineButtonElement.style.display = 'inline-block';
+    declineButtonElement.style.display = 'inline-block';
+    listButtonElement.style.display = 'inline-block';
 
 		setVisitorTimer();
 	
 		visitorIDElement.innerHTML = newVisitor.name;
 		acceptButtonElement.setAttribute('onClick', 'acceptVisitor()')
-		declineButtonElement.setAttribute('onClick', 'declineVisitor()')
+    declineButtonElement.setAttribute('onClick', 'declineVisitor()')
+    listButtonElement.setAttribute('onClick', 'showList()');
 	
 		visitorArray.shift();
 		} else {
 		console.log('NO VISITORS LEFT');
-	}
-}
+	};
+};
 
+// Add Delay to Next Visitor
 const nextVisitorDelay = () => {
 	visitorIDElement.innerHTML = 'No Visitors';
 	visitorTimerElement.innerHTML = '- - - - - -';
@@ -215,10 +236,13 @@ const nextVisitorDelay = () => {
 	setTimeout(nextVisitor, visitorDelay);
 };
 
-
+// Upon Accepting Visitor
 const acceptVisitor = () => {
   if(newVisitor.vipBool) {
     pointsCount += 25;
+    if(pointsCount >= 100) {
+      pointsCount = 100;
+    }
     console.log('VIP ACCEPTED');
     pointsElement.innerHTML = 'Job Performance: ' + pointsCount + '%';
   } else if (newVisitor.blacklistBool) {
@@ -227,23 +251,29 @@ const acceptVisitor = () => {
     console.log('BLACKLIST ACCEPTED');
   } else if (newVisitor.expectedBool) {
     pointsCount += 10;
+    if(pointsCount >= 100) {
+      pointsCount = 100;
+    }
     pointsElement.innerHTML = 'Job Performance: ' + pointsCount + '%';
     console.log('VISITOR ACCEPTED');
 	} else if (!newVisitor.expectedBool) {
 		pointsCount -= 10;
     pointsElement.innerHTML = 'Job Performance: ' + pointsCount + '%';
     console.log('WRONG VISITOR ACCEPTED');
-	}
+  };
 
+  // End Game at 0% Job Performance
 	if(pointsCount <= 0) {
 		endGame();
-	}
+	};
 	acceptButtonElement.style.display = 'none';  
-	declineButtonElement.style.display = 'none';
+  declineButtonElement.style.display = 'none';
+  listButtonElement.style.display = 'none';
   clearInterval(visitorTimerInterval);
   nextVisitorDelay();
 };
 
+// Upon Declining Visitor
 const declineVisitor = () => {
   if(newVisitor.vipBool) {
     pointsCount -= 25;
@@ -251,45 +281,68 @@ const declineVisitor = () => {
     pointsElement.innerHTML = 'Job Performance: ' + pointsCount + '%';
   } else if (newVisitor.blacklistBool) {
     pointsCount += 25;
+    if(pointsCount >= 100) {
+      pointsCount = 100;
+    }
     pointsElement.innerHTML = 'Job Performance: ' + pointsCount + '%';
     console.log('BLACKLIST REJECTED');
   } else if (!newVisitor.expectedBool) {
-    pointsCount -= 10;
+    pointsCount += 10;
+    if(pointsCount >= 100) {
+      pointsCount = 100;
+    }
     pointsElement.innerHTML = 'Job Performance: ' + pointsCount + '%';
     console.log('VISITOR REJECTED');
 	} else if (newVisitor.expectedBool) {
 		pointsCount -= 10;
     pointsElement.innerHTML = 'Job Performance: ' + pointsCount + '%';
     console.log('WRONG VISITOR REJECTED');
-	}
-
+	};
+  // End Game at 0% Job Performance
 	if(pointsCount <= 0) {
 		endGame();
-	}
+	};
 	acceptButtonElement.style.display = 'none';  
-	declineButtonElement.style.display = 'none';
+  declineButtonElement.style.display = 'none';
+  listButtonElement.style.display = 'none';
   clearInterval(visitorTimerInterval);
   nextVisitorDelay();
 };
 
+// Show Visitor List
+const showList = () => {
+  callListElement.style.display = 'inline-block';
+  setTimeout(function(){callListElement.style.display = 'none'}, 3000);
+  pointsCount -= 5;
+  pointsElement.innerHTML = 'Job Performance: ' + pointsCount + '%';
+  if(pointsCount <= 0) {
+		endGame();
+	};
+};
+
+// Create True/False value for Visitor keys
 const generateRandomVisitorBool = () => {
 	randomBool = Math.ceil(Math.random() * 2)
 	if(randomBool == 1) {
 		return true;
 	} else if (randomBool == 2) {
 		return false;
-	}
-}
+	};
+};
 
+// Create Morning Visitor List
 const generateMorningList = () => {
 	for(let i = 0; i < visitorArray.length; i++) {
-		visitorArray[i].expectedBool = generateRandomVisitorBool();
+    // Assign True/False to Visitor keys
+    visitorArray[i].expectedBool = generateRandomVisitorBool();
 		visitorArray[i].vipBool = generateRandomVisitorBool();
-		visitorArray[i].blacklistBool = generateRandomVisitorBool();
+    visitorArray[i].blacklistBool = generateRandomVisitorBool();
+    visitorArray[i].waitTime = Math.ceil(Math.random() * 5) + 3;
 
-		if(visitorArray[i].vipBool && visitorVIPLog.length <= 1) {
+    // Push each Visitor to appropriate Array
+		if(visitorArray[i].vipBool && visitorVIPLog.length <= 3) {
 			visitorVIPLog.push(visitorArray[i].name)
-		} else if (visitorArray[i].blacklistBool && visitorBlacklistLog.length <= 1) {
+		} else if (visitorArray[i].blacklistBool && visitorBlacklistLog.length <= 3) {
 			visitorBlacklistLog.push(visitorArray[i].name)
 		} else if (visitorArray[i].expectedBool) {
 			visitorExpectedLog.push(visitorArray[i].name);
@@ -300,32 +353,37 @@ const generateMorningList = () => {
 		} else {
 			visitorUnexpectedLog.push(visitorArray[i].name);
 		}
-	}
-	
+	};
+  
+  // Create the Morning Visitor Log string
 	visitorVIPLog = visitorVIPLog.join('<br />')
 	visitorBlacklistLog = visitorBlacklistLog.join('<br />')
 	visitorExpectedLog = visitorExpectedLog.join('<br />')
-	visitorUnexpectedLog = visitorUnexpectedLog.join('<br />')
+  visitorUnexpectedLog = visitorUnexpectedLog.join('<br />')
+	morningList = "VIPs: " + '<br />' + visitorVIPLog + '<br />' + '<br />' + "Expected Visitors: " + '<br />' + visitorExpectedLog + '<br />' + '<br />' + "Blacklisted Visitors: " + '<br />' +  visitorBlacklistLog;
+  
+  return morningList;
+};
 
-	morningList = "PAY ATTENTION, KID. HERE'S MY VISITOR LIST. DON'T FUCK IT UP." + '<br /><br />' + "VIPs: " + '<br />' + visitorVIPLog + '<br />' + '<br />' + "Expected Visitors: " + '<br />' + visitorExpectedLog + '<br />' + '<br />' + "Blacklisted Visitors: " + '<br />' +  visitorBlacklistLog;
-
-	return morningList;
-}
-
-
+// Function to Begin Visitor Arrival
 const beginDay = () => {
-	setElement();
+  setElement();
+  dialogueBoxElement.innerHTML = '';
   nextVisitorDelay();
   setInterval(tick, 2000);
-}
+};
+
+// Function to Begin Game when Start Button is clicked
 const startGame = () => {
 	startButtonElement = document.getElementById('start-button');
 	startButtonElement.style.display = 'none';
 	shuffle(visitorArray);
-	generateMorningList();
-	callListElement = document.getElementById('call-list');
-
+  generateMorningList();
+  
+  dialogueBoxElement = document.getElementById('dialogue-box');
+  callListElement = document.getElementById('call-list');
+  dialogueBoxElement.innerHTML = "BOSS: PAY ATTENTION. HERE'S MY VISITOR LIST. DON'T FUCK IT UP.";
 	callListElement.innerHTML = morningList;
 
-	setTimeout(beginDay, 3000);
-}
+	setTimeout(beginDay, 5000);
+};
