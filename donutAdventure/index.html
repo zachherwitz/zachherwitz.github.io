@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="player-container">
+        <div class='stats-container'>
+          <p id='player-statsbox'></p>
+          <div class="weapon-box">
+            <button class='weapon' id='weapon1-button'></button>
+            <button class='weapon' id='weapon2-button'></button>
+            <button class='weapon' id='weapon3-button'></button>
+            <button class='weapon' id='heal-button'></button>
+          </div>
+          <p id='killcount'>0</p>
+        </div>
+        <img id='player-image' src="img/donut.jpg" alt="donut">
+      </div>
+      <div class="enemy-container">
+        <img src="img/rat.png" alt="rat">
+        <p id='enemy-statsbox'></p>
+      </div>
+    </div>
+    <div id="text-container" class="text-container">
+      <p id="status-text">Text Goes Here:</p>
+    </div>
+    <script src="adventure-game.js" charset="utf-8"></script>
+  </body>
+</html>
