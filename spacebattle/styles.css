@@ -1,0 +1,49 @@
+body {
+  border: 1px solid black;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.button-container > button {
+  padding: 10px 20px;
+}
+
+.player-container {
+  border: 1px solid black;
+}
+
+.full-enemy-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70vw;
+  margin: 0 20px;
+}
+
+.enemy-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+img {
+  width: 320px;
+  height: 300px;
+}
+
+.stats-container {
+  margin: 100px auto;
+  border: 5px solid black;
+  overflow: auto;
+  height: 150px;
+  background-color: lightblue;
+  width: 70vw;
+}
