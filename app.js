@@ -1,41 +1,61 @@
+//
+//  HOW TO USE CTEXT API:
+//  getlink
+//  example: https://api.ctext.org/getlink?search=朋&urn=ctp:analects/xue-er
+//                               getlink? is the function
+//                                          search is where you would put the userInput
+//                                                    urn is the ctext specific id code for the text
+
+
+
+//
+//  searchtexts - search through texts based on parameter
+//  example: https://api.ctext.org/searchtexts?title=論語
+//                                  searchtexts? is the function
+//                                              title is where you would put the userInput
+
+
+
+
+
 $(() => {
 
-  let randomBookUrn;
+  // Setting up argument variables for the ajax method call
+  let $userInput = $('input[type="text"]').val()
+  let testChar = '好'
+  // let searchTextsLink = `https://api.ctext.org/searchtexts?title=${testChar}`
 
-  $.ajax({
-    url: 'https://api.ctext.org/gettexttitles'
-  }).then(
-    (data) => {
-      randomBookUrn = data.books[0].urn
-      console.log(randomBookUrn);
-      return randomBookUrn;
-      // let $newRadical = $('<div>').text(data.radical)
-      // $('body').append($newRadical)
-    },
-    (error) => {
-      console.log('error');
-    }
-  )
+  // SEARCH FOR A CHARACHTER, GET A TITLE AND URN BACK WITH A LINK TO IT -
+  // TODO:: getlink?
+  // const getBookInfo = (data) => {
+  //   console.log(data.books[0].title);
+  //   console.log(data.books[0].urn);
+  // }
 
-
-  const displayText = () => {
+  // ajax call on test button
+  $('#test-button').on('click', (event) => {
+    let dictionaryLink = `https://api.ctext.org/getcharacter?char=${$('input[type="text"]').val()}`
+    event.preventDefault()
+    console.log(`button pressed + text input:: ${$('input[type="text"]').val()}`);
     $.ajax({
-      url: `https://api.ctext.org/gettext?urn=ctp:mozi/befriending-the-learned`
+      url: dictionaryLink,
     }).then(
       (data) => {
+        // CALL THIS CODEBLOCK WHEN DATA HAS BEEN RETRIEVED AND IS READY TO BE MANIPULATED
         console.log(data);
-        let $newDiv = $('<div>').text(data.fulltext[0])
-        $('body').append($newDiv)
-      },
-      (error) => {
-        console.log('error');
+        $('#character-information').children().detach();
+        $('<li>').text(`Character: ${data.char}`).appendTo($('#character-information'))
+        $('<li>').text(`Radical Character: ${data.radical}`).appendTo($('#character-information'))
+        $('<li>').text(`Radical Strokes: ${data.radicalstrokes}`).appendTo($('#character-information'))
+        $('<li>').text(`Definition ${data.url}`).appendTo($('#character-information'))
+
+
+
       }
     )
-  }
-
-  $('button').on('click', () => {
-    displayText()
   })
+
+
 
 
 })
