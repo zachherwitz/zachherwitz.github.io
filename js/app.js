@@ -37,31 +37,53 @@ $(() => {
     $(event.currentTarget).val('')
   })
 
+  // pull all data when clicking 'pull data' button
+  $('#context-button').on('click', (event) => {
+    let contextLink = `https://api.ctext.org/searchtexts?title=${$('input[type="text"]').val()}`
+    event.preventDefault();
+    $('.context-container').children().detach()
+    console.log(`context button pressed + text input:: ${contextLink}`);
+    $.ajax({
+      url: contextLink,
+    }).then(
+      (data) => {
+        // Get the URN of the first book returned
+        console.log(data.books[0].title);
+        for (books in data.books) {
+          let $contextTitleElement = $('<a>').text(data.books[books].title).appendTo('.context-container')
+        }
+      }
+    )
+  })
+
   // ajax call on test button
-  $('#test-button').on('click', (event) => {
+  $('#definition-button').on('click', (event) => {
     let dictionaryLink = `https://api.ctext.org/getcharacter?char=${$('input[type="text"]').val()}`
     event.preventDefault()
-    console.log(`button pressed + text input:: ${$('input[type="text"]').val()}`);
+    console.log(`get definition button pressed + text input:: ${$('input[type="text"]').val()}`);
     $.ajax({
       url: dictionaryLink,
     }).then(
       (data) => {
-        if($('input[type="text"]').val()) {
+        // Resetting character info box
+        $('#character-information').children().detach();
+        $('#radical-information').off().hide();
+
+        if($('input[type="text"]').val() && !data.error) {
           // CALL THIS CODEBLOCK WHEN DATA HAS BEEN RETRIEVED AND IS READY TO BE MANIPULATED
           console.log(data);
-          // Resetting character info box
-          $('#character-information').children().detach();
 
           // Creating character link
           $('<a>').text(`${data.char}`).attr('href', `${data.url}`).addClass('character').appendTo($('#character-information'))
 
           // Creating Mandarin Pronunciation Display
-          $('<div>').text(`${data.readings.mandarinpinyin[0]}`).appendTo('#character-information')
+          $('<div>').text(`'${data.readings.mandarinpinyin[0]}'`).addClass('pronunciation').appendTo('#character-information')
 
           // Creating and appending radical information
-          $('#radical-information').text('More Information').on('click', (event) => {
+          $('#radical-information').show().text('More Information').on('click', (event) => {
             console.log(`clicked!`);
             $(event.currentTarget).children().toggle('fast', 'swing')
+
           })
 
 

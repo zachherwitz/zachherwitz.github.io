@@ -45,7 +45,23 @@ body {
   width: 90%;
   height: 40vh;
   margin: 10px 0;
+  display: flex;
 }
+
+.footer-container {
+  border: 5px solid purple;
+  margin: 10px 0;
+  height: 10vh;
+  width: 100%;
+}
+
+
+.off {
+  display: none;
+}
+
+
+/*   DICTIONARY SPECIFIC STYLES   */
 
 .input-container {
   border: 2px solid lightgreen;
@@ -61,24 +77,30 @@ body {
   background-color: lightblue;
   display: inline;
   padding: 5px;
+  margin: 20px;
   color: black;
   text-decoration: none;
+}
+
+.pronunciation {
+  font-size: 3em;
+  display: inline;
+}
+
+#character-information {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #radical-information {
   display: inline;
 }
 
-
-
-.footer-container {
-  border: 5px solid purple;
-  margin: 10px 0;
-  height: 10vh;
-  width: 100%;
-}
-
-
-.off {
-  display: none;
+.context-container {
+  border: 2px solid blue;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
 }
