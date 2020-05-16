@@ -55,12 +55,18 @@ body {
   border: 2px solid pink;
 }
 
-.character-li {
+.character {
   font-size: 5em;
   list-style: none;
   background-color: lightblue;
   display: inline;
   padding: 5px;
+  color: black;
+  text-decoration: none;
+}
+
+#radical-information {
+  display: inline;
 }
 
 
@@ -70,4 +76,9 @@ body {
   margin: 10px 0;
   height: 10vh;
   width: 100%;
+}
+
+
+.off {
+  display: none;
 }

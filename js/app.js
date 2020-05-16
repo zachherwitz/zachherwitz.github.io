@@ -32,6 +32,11 @@ $(() => {
   //   console.log(data.books[0].urn);
   // }
 
+  // clearing input field on click
+  $('#input-field').on('click', (event) => {
+    $(event.currentTarget).val('')
+  })
+
   // ajax call on test button
   $('#test-button').on('click', (event) => {
     let dictionaryLink = `https://api.ctext.org/getcharacter?char=${$('input[type="text"]').val()}`
@@ -44,11 +49,25 @@ $(() => {
         if($('input[type="text"]').val()) {
           // CALL THIS CODEBLOCK WHEN DATA HAS BEEN RETRIEVED AND IS READY TO BE MANIPULATED
           console.log(data);
+          // Resetting character info box
           $('#character-information').children().detach();
-          $('<li>').text(`${data.char}`).addClass('character-li').appendTo($('#character-information'))
-          $('<li>').text(`Radical Character: ${data.radical}`).appendTo($('#character-information'))
-          $('<li>').text(`Radical Strokes: ${data.radicalstrokes}`).appendTo($('#character-information'))
-          $('<a>').attr('href', `${data.url}`).text(`Definition`).appendTo($('#character-information'))
+
+          // Creating character link
+          $('<a>').text(`${data.char}`).attr('href', `${data.url}`).addClass('character').appendTo($('#character-information'))
+
+          // Creating Mandarin Pronunciation Display
+          $('<div>').text(`${data.readings.mandarinpinyin[0]}`).appendTo('#character-information')
+
+          // Creating and appending radical information
+          $('#radical-information').text('More Information').on('click', (event) => {
+            console.log(`clicked!`);
+            $(event.currentTarget).children().toggle('fast', 'swing')
+          })
+
+
+          // Create More Information content
+          $('<div>').text(`Radical Character: ${data.radical}`).appendTo($('#radical-information')).addClass('off')
+          $('<div>').text(`Radical Strokes: ${data.radicalstrokes}`).appendTo($('#radical-information')).addClass('off')
 
 
         }
