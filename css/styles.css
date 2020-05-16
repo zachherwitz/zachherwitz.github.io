@@ -43,7 +43,6 @@ body {
 .app-container {
   border: 5px solid green;
   width: 90%;
-  height: 40vh;
   margin: 10px 0;
   display: flex;
 }
@@ -69,6 +68,8 @@ body {
 
 .information-container {
   border: 2px solid pink;
+  display: flex;
+  flex-direction: column;
 }
 
 .character {
@@ -80,6 +81,7 @@ body {
   margin: 20px;
   color: black;
   text-decoration: none;
+  text-align: center;
 }
 
 .pronunciation {
@@ -94,9 +96,6 @@ body {
     align-items: center;
 }
 
-#radical-information {
-  display: inline;
-}
 
 .titles-container {
   border: 2px solid blue;

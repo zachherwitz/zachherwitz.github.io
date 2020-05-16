@@ -29,6 +29,20 @@ $(() => {
     $(event.currentTarget).val('')
   })
 
+
+  // DISPLAY CHARACTER INFORMATION
+  const displayCharacterInformation = (data) => {
+    // CALL THIS CODEBLOCK WHEN DATA HAS BEEN RETRIEVED AND IS READY TO BE MANIPULATED
+    console.log(data);
+
+    // Creating character link
+    $('<a>').text(`${data.char}`).attr({'href': `${data.url}`, 'target': '_blank'}).addClass('character').appendTo($('#character-information'))
+
+    // Creating Mandarin Pronunciation Display
+    $('<div>').text(`'${data.readings.mandarinpinyin[0]}'`).addClass('pronunciation').appendTo('#character-information')
+
+  }
+
   // DEFINE FUNCTIONALITY
   const lookUpDefinition = () => {
     let dictionaryLink = `https://api.ctext.org/getcharacter?char=${$('input[type="text"]').val()}`
@@ -40,28 +54,34 @@ $(() => {
       (data) => {
         // Resetting character info box
         $('#character-information').children().detach();
-        $('#radical-information').off().hide();
 
         if($('input[type="text"]').val() && !data.error) {
-          // CALL THIS CODEBLOCK WHEN DATA HAS BEEN RETRIEVED AND IS READY TO BE MANIPULATED
-          console.log(data);
-
-          // Creating character link
-          $('<a>').text(`${data.char}`).attr('href', `${data.url}`).addClass('character').appendTo($('#character-information'))
-
-          // Creating Mandarin Pronunciation Display
-          $('<div>').text(`'${data.readings.mandarinpinyin[0]}'`).addClass('pronunciation').appendTo('#character-information')
-
-          // Creating and appending radical information
-          $('#radical-information').show().text('More Information').on('click', (event) => {
-            console.log(`clicked!`);
-            $(event.currentTarget).children().toggle('fast', 'swing')
-
-          })
-
-          // Create More Information content
-          $('<div>').text(`Radical Character: ${data.radical}`).appendTo($('#radical-information')).addClass('off')
-          $('<div>').text(`Radical Strokes: ${data.radicalstrokes}`).appendTo($('#radical-information')).addClass('off')
+          displayCharacterInformation(data)
+        } else if (data.error) {
+          // IF YOU SEARCH FOR MORE THAN ONE CHARACTER
+          console.log(data.error);
+          // SPLIT THE CHARACTERS INTO SEPERATE INDEXES
+          let $fullText;
+          let characterArray = $('input[type="text"]').val().split('')
+          let characterPronunciation = '';
+          let characterPronunciationArray = [];
+          let characterPronunciationDiv = $('<div>')
+          console.log(characterArray);
+          for (char in characterArray) {
+            $.ajax({
+              url: `https://api.ctext.org/getcharacter?char=${characterArray[char]}`
+            }).then(
+              (data) => {
+                displayCharacterInformation(data);
+                characterPronunciationArray.unshift(data.readings.mandarinpinyin[0])
+                characterPronunciationArray.reverse();
+                characterPronunciation = characterPronunciationArray.join(' ');
+                console.log(characterPronunciation);
+                characterPronunciationDiv.text(characterPronunciation)
+              }
+            )
+          }
+          $fullText = $('<a>').text(`${$('input[type="text"]').val()}`).addClass('character').attr({'href': `https://ctext.org/dictionary.pl?if=en&char=${$('input[type="text"]').val()}`, 'target': '_blank'}).appendTo('#character-information').append(characterPronunciationDiv)
         }
       }
     )
@@ -79,7 +99,7 @@ $(() => {
       (data) => {
         // Get the URN of the first book returned
         for (books in data.books) {
-          let $titleElement = $('<a>').text(data.books[books].title).appendTo('.titles-container').attr('href', `https://api.ctext.org/getlink?redirect=1&urn=${data.books[books].urn}`)
+          let $titleElement = $('<a>').text(data.books[books].title).appendTo('.titles-container').attr({'href': `https://api.ctext.org/getlink?redirect=1&urn=${data.books[books].urn}`, 'target': '_blank'})
         }
       }
     )
