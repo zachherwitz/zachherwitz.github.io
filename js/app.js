@@ -23,41 +23,14 @@ $(() => {
   // Setting up argument variables for the ajax method call
   let $userInput = $('input[type="text"]').val()
   let testChar = '好'
-  // let searchTextsLink = `https://api.ctext.org/searchtexts?title=${testChar}`
-
-  // SEARCH FOR A CHARACHTER, GET A TITLE AND URN BACK WITH A LINK TO IT -
-  // TODO:: getlink?
-  // const getBookInfo = (data) => {
-  //   console.log(data.books[0].title);
-  //   console.log(data.books[0].urn);
-  // }
 
   // clearing input field on click
   $('#input-field').on('click', (event) => {
     $(event.currentTarget).val('')
   })
 
-  // pull all data when clicking 'pull data' button
-  $('#context-button').on('click', (event) => {
-    let contextLink = `https://api.ctext.org/searchtexts?title=${$('input[type="text"]').val()}`
-    event.preventDefault();
-    $('.context-container').children().detach()
-    console.log(`context button pressed + text input:: ${contextLink}`);
-    $.ajax({
-      url: contextLink,
-    }).then(
-      (data) => {
-        // Get the URN of the first book returned
-        console.log(data.books[0].title);
-        for (books in data.books) {
-          let $contextTitleElement = $('<a>').text(data.books[books].title).appendTo('.context-container')
-        }
-      }
-    )
-  })
-
-  // ajax call on test button
-  $('#definition-button').on('click', (event) => {
+  // DEFINE FUNCTIONALITY
+  const lookUpDefinition = () => {
     let dictionaryLink = `https://api.ctext.org/getcharacter?char=${$('input[type="text"]').val()}`
     event.preventDefault()
     console.log(`get definition button pressed + text input:: ${$('input[type="text"]').val()}`);
@@ -86,15 +59,36 @@ $(() => {
 
           })
 
-
           // Create More Information content
           $('<div>').text(`Radical Character: ${data.radical}`).appendTo($('#radical-information')).addClass('off')
           $('<div>').text(`Radical Strokes: ${data.radicalstrokes}`).appendTo($('#radical-information')).addClass('off')
-
-
         }
       }
     )
+  }
+
+  // TITLE LOOKUP FUNCTIONALITY
+  const lookUpTitles = () => {
+    let titlesLink = `https://api.ctext.org/searchtexts?title=${$('input[type="text"]').val()}`
+    event.preventDefault();
+    $('.titles-container').children().detach()
+    console.log(`titles button pressed + text input:: ${titlesLink}`);
+    $.ajax({
+      url: titlesLink,
+    }).then(
+      (data) => {
+        // Get the URN of the first book returned
+        for (books in data.books) {
+          let $titleElement = $('<a>').text(data.books[books].title).appendTo('.titles-container').attr('href', `https://api.ctext.org/getlink?redirect=1&urn=${data.books[books].urn}`)
+        }
+      }
+    )
+  }
+
+  // ajax call on test button
+  $('#definition-button').on('click', (event) => {
+    lookUpDefinition();
+    lookUpTitles();
   })
 
 
