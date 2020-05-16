@@ -41,16 +41,17 @@ $(() => {
       url: dictionaryLink,
     }).then(
       (data) => {
-        // CALL THIS CODEBLOCK WHEN DATA HAS BEEN RETRIEVED AND IS READY TO BE MANIPULATED
-        console.log(data);
-        $('#character-information').children().detach();
-        $('<li>').text(`Character: ${data.char}`).appendTo($('#character-information'))
-        $('<li>').text(`Radical Character: ${data.radical}`).appendTo($('#character-information'))
-        $('<li>').text(`Radical Strokes: ${data.radicalstrokes}`).appendTo($('#character-information'))
-        $('<li>').text(`Definition ${data.url}`).appendTo($('#character-information'))
+        if($('input[type="text"]').val()) {
+          // CALL THIS CODEBLOCK WHEN DATA HAS BEEN RETRIEVED AND IS READY TO BE MANIPULATED
+          console.log(data);
+          $('#character-information').children().detach();
+          $('<li>').text(`${data.char}`).addClass('character-li').appendTo($('#character-information'))
+          $('<li>').text(`Radical Character: ${data.radical}`).appendTo($('#character-information'))
+          $('<li>').text(`Radical Strokes: ${data.radicalstrokes}`).appendTo($('#character-information'))
+          $('<a>').attr('href', `${data.url}`).text(`Definition`).appendTo($('#character-information'))
 
 
-
+        }
       }
     )
   })
