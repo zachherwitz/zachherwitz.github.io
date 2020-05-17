@@ -4,7 +4,7 @@ $(() => {
 
   // Creating Global variables
   let $userInput = '';
-
+  let charArray = [];
 
           // HTML ELEMENTS // HTML ELEMENTS // HTML ELEMENTS // HTML ELEMENTS //
 
@@ -23,11 +23,18 @@ $(() => {
                 .keydown((event) => {
                   // https://www.w3schools.com/jsref/event_key_code.asp
                   if(event.code === 'Enter') {
+                    $characterInfoContainer.children().detach()
                     captureUserInput(); // captures the user input and saves it to $userInput
-                    callData($userInput);
+                    console.log(`user input is ${$userInput}`); // In case user inputs several characters
+                    charArray = $userInput.split(''); // splitting input into array
+                    for (let index in charArray) {
+                      $(callData(charArray[index])).delay(500);
+                    }
                   }
                 })
 
+  // Character Information Container
+  let $characterInfoContainer = $('<div>').addClass('character-info-container')
 
                   // APPENDING // APPENDING // APPENDING // APPENDING //
 
@@ -36,7 +43,8 @@ $(() => {
 
 
   // Appending items  to APP CONTAINER
-  $('.app-container').append($form) // add final appended items here!
+  $('.app-container').append($form, $characterInfoContainer) // add final appended items here!
+
 
 
                 // DICTIONARY FUNCTIONALITY // DICTIONARY FUNCTIONALITY //
@@ -55,12 +63,26 @@ $(() => {
       url: `https://api.ctext.org/getcharacter?char=${input}`
     }).then(
       (data) => {
-        console.log(data);
+        let charPinyin = data.char; // Set Pinyin of Character
+        let charPronunciation = data.readings.mandarinpinyin[0]; // Set Pronunciation of Character
+        setCharInformation(charPinyin, charPronunciation)
       }
     )
   }
 
+  const setCharInformation = (pinyin, pronunciation) => {
 
+    // Create Character Container:
+    // Container div
+    let $newCharContainer = $('<div>').addClass('character-container')
+
+    // Character Information
+    $('<div>').text(pinyin).addClass('pinyin').appendTo($newCharContainer)
+    $('<div>').text(pronunciation).addClass('pronunciation').appendTo($newCharContainer)
+
+    // Appending to the info container
+    $characterInfoContainer.append($newCharContainer)
+  }
 
 
 

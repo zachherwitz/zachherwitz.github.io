@@ -61,3 +61,32 @@ body {
 }
 
 /* DICTIONARY STYLES */
+
+form {
+  border: 3px solid yellow;
+  width: 20%;
+}
+
+#inputField {
+  width: 80%;
+}
+
+.character-info-container {
+  display: flex;
+  flex-direction:row-reverse;
+  border: 5px solid maroon;
+}
+
+.character-container {
+  border: 3px solid lightblue;
+}
+
+.pinyin {
+  color: red;
+  font-size: 5em;
+}
+
+.pronunciation {
+  color: pink;
+  font-size: 5em;
+}
