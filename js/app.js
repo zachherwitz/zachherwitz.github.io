@@ -60,6 +60,22 @@ $(() => {
                   }
                 })
 
+
+  //TODO//TODO// Create mobile-friendly click button
+  let $inputButton = $('<button>')
+                      .on('click', (event) => {
+                        event.preventDefault();
+                        $characterInfoContainer.children().detach()
+                        $userInput = $('#inputField').val();
+                        console.log(`user input is ${$userInput}`);
+                        charArray = $userInput.split('');
+                        for (let index in charArray) {
+                          $(callData(charArray[index]));
+                        }
+                      })
+                      .addClass('mobile-button')
+                      .text('GO')
+
   // Sample Characters for dev testing
   let $sampleCharacters = $('<div>').text('我 们 多 是 学生 和 我们是很好')
 
@@ -69,7 +85,7 @@ $(() => {
                   // APPENDING // APPENDING // APPENDING // APPENDING //
 
   // Appending items to $form
-  $form.append($input, $sampleCharacters);
+  $form.append($input, $sampleCharacters, $inputButton);
 
   //zach~//~zach~//~zach~//   SETTING UP FUNCTIONALITY   //~zach~//~zach~//~zach
 
@@ -114,7 +130,6 @@ $(() => {
     $characterInfoContainer.append($newCharContainer)
   }
 
-// TODO :: RESET CHARACTER INFORMATION WHEN\ DICTIONARY IS CLOSED
   const setDictionary = () => {
     $('.app-container').children().detach()
     $characterInfoContainer.children().detach();
@@ -130,6 +145,4 @@ $(() => {
 
   $('#dictionary-app').on('click', setDictionary)
   $('#flashcards-app').on('click', setFlashCards)
-
-
 })

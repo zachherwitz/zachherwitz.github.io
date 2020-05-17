@@ -70,6 +70,11 @@ form {
   font-size: 1.7em;
 }
 
+.mobile-button {
+  width: 40px;
+  height: 40px;
+}
+
 a {
   text-decoration: none;
 }
