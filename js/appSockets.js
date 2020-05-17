@@ -1,12 +1,39 @@
+// DOESN'T WORK YET
+// const allowDrop = (event) => {
+//   event.preventDefault()
+// }
+//
+// const drag = (event) => {
+//   console.log(event.target.id);
+//   event.dataTransfer.setData('text', event.target.id)
+// }
+//
+// const checkApp = (event) => {
+//   event.preventDefault();
+//   let appName = event.dataTransfer.getData('text')
+//   console.log(appName);
+//   if (appName === 'dictionary-app') {
+//     console.log('booting dictonary');
+//     setDictionary();
+//   }
+// }
+
 $(() => {
 
   console.log('linked!');
 
+  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+  //                                                                          //
+  //                             DICTIONARY                                    //
+  //                                                                          //
+  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+
+  //zach~//~zach~//~zach~//   SETTING UP HTML ELEMENTS   //~zach~//~zach~//~zach
+
+
   // Creating Global variables
   let $userInput = '';
   let charArray = [];
-
-          // HTML ELEMENTS // HTML ELEMENTS // HTML ELEMENTS // HTML ELEMENTS //
 
 
   // Creating Form:
@@ -44,16 +71,9 @@ $(() => {
   // Appending items to $form
   $form.append($input, $sampleCharacters);
 
+  //zach~//~zach~//~zach~//   SETTING UP FUNCTIONALITY   //~zach~//~zach~//~zach
 
-  // Appending items  to APP CONTAINER
-  $('.app-container').append($form, $characterInfoContainer) // add final appended items here!
-
-
-
-                // DICTIONARY FUNCTIONALITY // DICTIONARY FUNCTIONALITY //
-
-
-// Save and reset input field on ENTER
+  // Save and reset input field on ENTER
   const captureUserInput = () => {
     event.preventDefault(); // preventing page refresh
     $userInput = $(event.currentTarget).val(); // saving user input to variable
@@ -73,6 +93,7 @@ $(() => {
     )
   }
 
+  // Displays Character information in flexbox form
   const setCharInformation = (pinyin, pronunciation) => {
 
     // Create Character Container:
@@ -93,7 +114,28 @@ $(() => {
     $characterInfoContainer.append($newCharContainer)
   }
 
+  const setDictionary = () => {
+    $('.app-container').children().detach()
+    console.log('booting dictionary');
+    $('.app-container').append($form, $characterInfoContainer) // add final appended items here!
+  }
 
+  const setFlashCards = () => {
+    $('.app-container').children().detach()
+    console.log('booting flashcards');
+  }
+
+
+  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+  //                                                                          //
+  //                         DRAGABLLE ELEMENTS                               //
+  //                                                                          //
+  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+
+
+  $('#dictionary-app').attr({'draggable': 'true', 'ondragstart':'drag(event)'}).on('click', setDictionary)
+  $('#flashcards-app').attr({'draggable': 'true', 'ondragstart':'drag(event)'}).on('click', setFlashCards)
+  $('.app-container').attr({ 'ondrop':'checkApp(event)', 'ondragover':'allowDrop(event)'})
 
 
 })
