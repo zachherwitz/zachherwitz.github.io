@@ -86,6 +86,8 @@ $(() => {
             )
           }
           $fullText = $('<a>').text(`${$('input[type="text"]').val()}`).addClass('character').attr({'href': `https://ctext.org/dictionary.pl?if=en&char=${$('input[type="text"]').val()}`, 'target': '_blank'}).appendTo('#string-information').append(characterPronunciationDiv)
+          characterPronunciationArray = []
+
         }
       }
     )
