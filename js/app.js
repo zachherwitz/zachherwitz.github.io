@@ -114,8 +114,10 @@ $(() => {
     $characterInfoContainer.append($newCharContainer)
   }
 
+// TODO :: RESET CHARACTER INFORMATION WHEN\ DICTIONARY IS CLOSED
   const setDictionary = () => {
     $('.app-container').children().detach()
+    $characterInfoContainer.children().detach();
     console.log('booting dictionary');
     $('.app-container').append($form, $characterInfoContainer) // add final appended items here!
   }
@@ -126,16 +128,8 @@ $(() => {
   }
 
 
-  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
-  //                                                                          //
-  //                         DRAGABLLE ELEMENTS                               //
-  //                                                                          //
-  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
-
-
-  $('#dictionary-app').attr({'draggable': 'true', 'ondragstart':'drag(event)'}).on('click', setDictionary)
-  $('#flashcards-app').attr({'draggable': 'true', 'ondragstart':'drag(event)'}).on('click', setFlashCards)
-  $('.app-container').attr({ 'ondrop':'checkApp(event)', 'ondragover':'allowDrop(event)'})
+  $('#dictionary-app').on('click', setDictionary)
+  $('#flashcards-app').on('click', setFlashCards)
 
 
 })
