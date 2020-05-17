@@ -36,10 +36,14 @@ $(() => {
     console.log(data);
 
     // Creating character link
-    $('<a>').text(`${data.char}`).attr({'href': `${data.url}`, 'target': '_blank'}).addClass('character').appendTo($('#character-information'))
+    let $newCharLink = $('<a>').text(`${data.char}`).attr({'href': `${data.url}`, 'target': '_blank'}).addClass('character')
 
     // Creating Mandarin Pronunciation Display
-    $('<div>').text(`'${data.readings.mandarinpinyin[0]}'`).addClass('pronunciation').appendTo('#character-information')
+    let $newCharPronunciation = $('<div>').text(`'${data.readings.mandarinpinyin[0]}'`).addClass('pronunciation')
+
+    // Creating Char Container div
+    let $newCharInfoDiv = $('<div>').append($newCharLink, $newCharPronunciation).addClass('character-information-container');
+    $('#character-information').append($newCharInfoDiv)
 
   }
 
@@ -54,6 +58,7 @@ $(() => {
       (data) => {
         // Resetting character info box
         $('#character-information').children().detach();
+        $('#string-information').children().detach();
 
         if($('input[type="text"]').val() && !data.error) {
           displayCharacterInformation(data)
@@ -73,15 +78,14 @@ $(() => {
             }).then(
               (data) => {
                 displayCharacterInformation(data);
-                characterPronunciationArray.unshift(data.readings.mandarinpinyin[0])
-                characterPronunciationArray.reverse();
+                characterPronunciationArray.push(data.readings.mandarinpinyin[0])
                 characterPronunciation = characterPronunciationArray.join(' ');
                 console.log(characterPronunciation);
                 characterPronunciationDiv.text(characterPronunciation)
               }
             )
           }
-          $fullText = $('<a>').text(`${$('input[type="text"]').val()}`).addClass('character').attr({'href': `https://ctext.org/dictionary.pl?if=en&char=${$('input[type="text"]').val()}`, 'target': '_blank'}).appendTo('#character-information').append(characterPronunciationDiv)
+          $fullText = $('<a>').text(`${$('input[type="text"]').val()}`).addClass('character').attr({'href': `https://ctext.org/dictionary.pl?if=en&char=${$('input[type="text"]').val()}`, 'target': '_blank'}).appendTo('#string-information').append(characterPronunciationDiv)
         }
       }
     )
