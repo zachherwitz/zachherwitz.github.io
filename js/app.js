@@ -1,23 +1,3 @@
-// DOESN'T WORK YET
-// const allowDrop = (event) => {
-//   event.preventDefault()
-// }
-//
-// const drag = (event) => {
-//   console.log(event.target.id);
-//   event.dataTransfer.setData('text', event.target.id)
-// }
-//
-// const checkApp = (event) => {
-//   event.preventDefault();
-//   let appName = event.dataTransfer.getData('text')
-//   console.log(appName);
-//   if (appName === 'dictionary-app') {
-//     console.log('booting dictonary');
-//     setDictionary();
-//   }
-// }
-
 $(() => {
 
   console.log('linked!');
@@ -55,7 +35,9 @@ $(() => {
                     console.log(`user input is ${$userInput}`); // In case user inputs several characters
                     charArray = $userInput.split(''); // splitting input into array
                     for (let index in charArray) {
-                      $(callData(charArray[index]));
+                      if(charArray[index] !== ' ') {
+                        $(callDictionaryData(charArray[index]));
+                      }
                     }
                   }
                 })
@@ -70,7 +52,9 @@ $(() => {
                         console.log(`user input is ${$userInput}`);
                         charArray = $userInput.split('');
                         for (let index in charArray) {
-                          $(callData(charArray[index]));
+                          if(charArray[index] !== ' ') {
+                            $(callDictionaryData(charArray[index]));
+                          }
                         }
                       })
                       .addClass('mobile-button')
@@ -97,17 +81,28 @@ $(() => {
   }
 
 // Calls on the website to provide information based on userInput
-  const callData = (input) => {
+  const callDictionaryData = (input) => {
     $.ajax({
       url: `https://api.ctext.org/getcharacter?char=${input}`
     }).then(
       (data) => {
         let charPinyin = data.char; // Set Pinyin of Character
         let charPronunciation = data.readings.mandarinpinyin[0]; // Set Pronunciation of Character
-        setCharInformation(charPinyin, charPronunciation)
+        if (isDictionary){
+          setCharInformation(charPinyin, charPronunciation)
+        } else if (isFlashCards) {
+          //////////////////////////////////////////////////////////////////////
+          testFunction() // THIS IS WHERE THE FLASHCARD CODE SHOULD GO!!!!!!//////
+          ////////////////////////////////////////////////////////////////////////
+        }
       }
     )
   }
+
+  const testFunction = () => {
+    console.log('TESTING!');
+  }
+
 
   // Displays Character information in flexbox form
   const setCharInformation = (pinyin, pronunciation) => {
@@ -130,18 +125,56 @@ $(() => {
     $characterInfoContainer.append($newCharContainer)
   }
 
+
+
+  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+  //                                                                          //
+  //                             FLASH CARDS                                  //
+  //                                                                          //
+  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+  //                                                                          //
+  //                             APP BUTTONS                                  //
+  //                                                                          //
+  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+
+
   const setDictionary = () => {
+    isDictionary = true;
+    isFlashCards = false
     $('.app-container').children().detach()
     $characterInfoContainer.children().detach();
     console.log('booting dictionary');
+    $input.val('')
     $('.app-container').append($form, $characterInfoContainer) // add final appended items here!
   }
 
   const setFlashCards = () => {
+    isDictionary = false;
+    isFlashCards = true
     $('.app-container').children().detach()
     console.log('booting flashcards');
+    $input.val('')
+    $('.app-container').append($form);
   }
-
 
   $('#dictionary-app').on('click', setDictionary)
   $('#flashcards-app').on('click', setFlashCards)
