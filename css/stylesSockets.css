@@ -46,6 +46,7 @@ body {
   height: 40vh;
   margin: 10px 0;
   display: flex;
+  justify-content: space-between;
 }
 
 .footer-container {
@@ -71,14 +72,22 @@ form {
   width: 80%;
 }
 
+a {
+  text-decoration: none;
+}
+
 .character-info-container {
   display: flex;
-  flex-direction:row-reverse;
+  margin: 0 auto;
   border: 5px solid maroon;
 }
 
 .character-container {
   border: 3px solid lightblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .pinyin {

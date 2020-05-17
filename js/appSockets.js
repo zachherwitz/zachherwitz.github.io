@@ -28,10 +28,13 @@ $(() => {
                     console.log(`user input is ${$userInput}`); // In case user inputs several characters
                     charArray = $userInput.split(''); // splitting input into array
                     for (let index in charArray) {
-                      $(callData(charArray[index])).delay(500);
+                      $(callData(charArray[index]));
                     }
                   }
                 })
+
+  // Sample Characters for dev testing
+  let $sampleCharacters = $('<div>').text('我 们 多 是 学生 和 我们是很好')
 
   // Character Information Container
   let $characterInfoContainer = $('<div>').addClass('character-info-container')
@@ -39,7 +42,7 @@ $(() => {
                   // APPENDING // APPENDING // APPENDING // APPENDING //
 
   // Appending items to $form
-  $form.append($input);
+  $form.append($input, $sampleCharacters);
 
 
   // Appending items  to APP CONTAINER
@@ -77,8 +80,14 @@ $(() => {
     let $newCharContainer = $('<div>').addClass('character-container')
 
     // Character Information
-    $('<div>').text(pinyin).addClass('pinyin').appendTo($newCharContainer)
-    $('<div>').text(pronunciation).addClass('pronunciation').appendTo($newCharContainer)
+    $('<a>').text(pinyin)
+      .addClass('pinyin')
+      .appendTo($newCharContainer)
+      .attr({'href': `https://ctext.org/dictionary.pl?if=en&char=${pinyin}`, 'target': '_blank'})
+    $('<a>').text(pronunciation)
+      .addClass('pronunciation')
+      .appendTo($newCharContainer)
+      .attr({'href': `https://ctext.org/dictionary.pl?if=en&char=${pinyin}`, 'target': '_blank'})
 
     // Appending to the info container
     $characterInfoContainer.append($newCharContainer)
