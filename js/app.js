@@ -36,14 +36,7 @@ $(() => {
 
   // Creating Form Innards:
   let $input = $('<input>')
-                .attr({
-                  'type': 'text',
-                  'id': 'inputField',
-                  'name': 'inputField',
-                  'placeholder': 'enter char',
-                  'ondrop': 'drop(event)',
-                  'ondragover': 'allowDrop(event)'
-                })
+                .attr({'type': 'text', 'id': 'inputField', 'name': 'inputField', 'placeholder': 'enter char'})
                 .click(
                   (event) => {
                     event.preventDefault()
@@ -58,19 +51,16 @@ $(() => {
 
 
 
-  // Create mobile-friendly click button
+  //TODO//TODO// Create mobile-friendly click button
   let $inputButton = $('<div>')
                       .on('click', (event) => {
                         enterInput(event)
                       })
                       .addClass('mobile-button')
                       .text('递交')
-                      // https://www.w3schools.com/html/html5_draganddrop.asp
-                      .attr({
-                        'draggable': 'true',
-                        'ondragstart': 'drag(event)'
-                      })
 
+  // Sample Characters for dev testing
+  let $sampleCharacters = $('<div>').text('我 们 多 是 学生 和 我们是很好')
 
   // Character Information Container
   let $characterInfoContainer = $('<div>').addClass('character-info-container')
@@ -295,24 +285,4 @@ $(() => {
 
   $('#dictionary-app').on('click', setDictionary)
   $('#flashcards-app').on('click', setFlashCards)
-
 })
-
-//https://www.w3schools.com/html/html5_draganddrop.asp
-// EXPLAIN HOW THIS WORKS
-const allowDrop = (event) => {
-  event.preventDefault();
-}
-
-// Create a function called 'drag'. Drag uses the dataTransfer
-const drag = (event) => {
-  console.log('drag start');
-  event.dataTransfer.setData('dev', 'devdrag');
-}
-
-const drop = (event) => {
-  event.preventDefault();
-  if(event.dataTransfer.getData('dev') == 'devdrag') {
-    $('#inputField').val('你好吗我叫咋吃我是学生')
-  }
-}
