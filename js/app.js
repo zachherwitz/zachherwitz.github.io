@@ -14,6 +14,9 @@ $(() => {
   // Creating Global variables
   let $userInput = '';
   let charArray = [];
+  let flashCardDeck = [];
+  let pronunciationArray = [];
+  let currentDeckObject;
 
 
   // Creating Form:
@@ -28,7 +31,7 @@ $(() => {
                     $(event.currentTarget).val('')
                   })
                 .keydown((event) => {
-                  // https://www.w3schools.com/jsref/event_key_code.asp
+                  // http://www.w3schools.com/jsref/event_key_code.asp
                   if(event.code === 'Enter') {
                     $characterInfoContainer.children().detach()
                     captureUserInput(); // captures the user input and saves it to $userInput
@@ -83,7 +86,7 @@ $(() => {
 // Calls on the website to provide information based on userInput
   const callDictionaryData = (input) => {
     $.ajax({
-      url: `https://api.ctext.org/getcharacter?char=${input}`
+      url: `http://api.ctext.org/getcharacter?char=${input}`
     }).then(
       (data) => {
         let charPinyin = data.char; // Set Pinyin of Character
@@ -92,7 +95,7 @@ $(() => {
           setCharInformation(charPinyin, charPronunciation)
         } else if (isFlashCards) {
           //////////////////////////////////////////////////////////////////////
-          testFunction() // THIS IS WHERE THE FLASHCARD CODE SHOULD GO!!!!!!//////
+          constructFlashCardDeck(charPinyin, charPronunciation)
           ////////////////////////////////////////////////////////////////////////
         }
       }
@@ -115,15 +118,20 @@ $(() => {
     $('<a>').text(pinyin)
       .addClass('pinyin')
       .appendTo($newCharContainer)
-      .attr({'href': `https://ctext.org/dictionary.pl?if=en&char=${pinyin}`, 'target': '_blank'})
+      .attr({'href': `http://ctext.org/dictionary.pl?if=en&char=${pinyin}`, 'target': '_blank'})
     $('<a>').text(pronunciation)
       .addClass('pronunciation')
       .appendTo($newCharContainer)
-      .attr({'href': `https://ctext.org/dictionary.pl?if=en&char=${pinyin}`, 'target': '_blank'})
+      .attr({'href': `http://ctext.org/dictionary.pl?if=en&char=${pinyin}`, 'target': '_blank'})
 
     // Appending to the info container
     $characterInfoContainer.append($newCharContainer)
   }
+
+
+
+
+
 
 
 
@@ -132,6 +140,64 @@ $(() => {
   //                             FLASH CARDS                                  //
   //                                                                          //
   //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+
+  let flashCardArray = []
+
+  class FlashCardSet {
+    constructor(targetChar, targetPronunciation) {
+      this.targetChar = targetChar;
+      this.targetPronunciation = targetPronunciation;
+      this.randomPronunciation = [];
+    }
+
+    playset() {
+      console.log(this.targetChar, this.pronunciation);
+    }
+  }
+
+
+  // Construct Flashcard Game for flashCardDeck[0]
+  const createDeckUI = (pinyin, pronunciation) => {
+    currentDeckObject = flashCardDeck[0]
+    console.log(currentDeckObject);
+    // DIV CONTAINTING Game
+    let $deckContainer = $('<div>').addClass('deck-container')
+      // DIV CONTAINING target
+    let $targetContainer = $('<div>').addClass('target-container')
+        // targetchar
+    let $targetChar = $('<div>').addClass('target-char')
+      // DIV CONTAINING random pronunciation x4
+    let $randomCardContainer = $('<div>').addClass('random-card-container')
+        // Random Pronunciation 1
+    let $randomCard1 = $('<div>').addClass('random-card')
+        // Random Pronunciation 2
+    let $randomCard2 = $('<div>').addClass('random-card')
+        // Random Pronunciation 3
+    let $randomCard3 = $('<div>').addClass('random-card')
+        // Random Pronunciation 4
+    let $randomCard4 = $('<div>').addClass('random-card')
+
+      // APPENDING
+      $targetContainer.append($targetChar);
+      $randomCardContainer.append($randomCard1, $randomCard2, $randomCard3, $randomCard4)
+      $deckContainer.append($targetContainer, $randomCardContainer).appendTo('.app-container')
+  }
+
+
+  const constructFlashCardDeck = (pinyin, pronunciation) => {
+    pronunciationArray.push(pronunciation)
+    let newFlashCardSet = new FlashCardSet(pinyin, pronunciation)
+    flashCardDeck.push(newFlashCardSet)
+    if (!currentDeckObject) {
+      createDeckUI(pinyin, pronunciation);
+    }
+    // Creating flashcards objects
+    // Push flashcards to array
+    // create html and css structure of 1 card on top and then 4 cards to click at the bottom
+    // based on which object is chosen, populate data on the cards and assign click functions based on which is the right answer
+    // add a point somewhere based on how many you get correct
+
+  }
 
 
 
