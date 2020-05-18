@@ -313,6 +313,6 @@ const drag = (event) => {
 const drop = (event) => {
   event.preventDefault();
   if(event.dataTransfer.getData('dev') == 'devdrag') {
-    $('#inputField').val('你好吗我叫咋吃我是学生')
+    $('#inputField').val('你好吗我叫咋吃我是学生').focus();
   }
 }

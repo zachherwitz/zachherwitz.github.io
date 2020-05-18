@@ -8,7 +8,7 @@ body {
   background-position: center;
 }
 
-@media (max-width:400px) {
+@media (max-width:600px) {
   body {
     /* Photo by Sarah Dorweiler on Unsplash */
     background-image: url('../images/background-mobile.jpg');
