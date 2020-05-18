@@ -57,7 +57,7 @@ $(() => {
                         enterInput(event)
                       })
                       .addClass('mobile-button')
-                      .text('GO')
+                      .text('递交')
 
   // Sample Characters for dev testing
   let $sampleCharacters = $('<div>').text('我 们 多 是 学生 和 我们是很好')
