@@ -142,9 +142,10 @@ $(() => {
 
   let flashCardArray = []
   let randomCardArray = []
-  let pinyin1
-  let pinyin2
-  let pinyin3
+  let pinyin1;
+  let pinyin2;
+  let pinyin3;
+  let flashCardPoints = 0;
 
   // Function that randomizes 3 of the random pronunciations for Flashcard
   const randomizePronunciation = (array) => {
@@ -170,6 +171,8 @@ $(() => {
   const checkPronunciation = (event) => {
     if($(event.currentTarget).text() === currentDeckObject.targetPronunciation) {
       console.log('its a match!');
+      flashCardPoints++
+      console.log(`it's a match! Points: ${flashCardPoints}`);
     }
   }
 
@@ -229,8 +232,9 @@ $(() => {
 
     // APPENDING
     $targetContainer.append($targetChar);
-    $randomCardContainer.append($randomCardArray)
-    $deckContainer.append($targetContainer, $randomCardContainer).appendTo('.app-container')
+    $randomCardContainer.append($randomCardArray);
+    $deckContainer.append($targetContainer, $randomCardContainer);
+    $('.app-container').append($deckContainer);
   }
 
 
