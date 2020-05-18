@@ -2,22 +2,33 @@ $(() => {
 
   console.log('linked!');
 
-  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
-  //                                                                          //
-  //                             DICTIONARY                                    //
-  //                                                                          //
-  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
-
-  //zach~//~zach~//~zach~//   SETTING UP HTML ELEMENTS   //~zach~//~zach~//~zach
-
+  // Function that is called when you submit your input
+  const enterInput = (event) => {
+    event.preventDefault();
+    $characterInfoContainer.children().detach()
+    $userInput = $('#inputField').val();
+    console.log(`user input is ${$userInput}`);
+    charArray = $userInput.split('');
+    for (let index in charArray) {
+      if(charArray[index] !== ' ') {
+        $(callDictionaryData(charArray[index]));
+      }
+    }
+  }
 
   // Creating Global variables
   let $userInput = '';
   let charArray = [];
   let flashCardDeck = [];
-  let pronunciationArray = [];
   let currentDeckObject;
 
+  let hsk1 = ['ài', 'bā', 'bà ba', 'bēi zi', 'Běi jīng', 'běn', 'bù kè qi', 'bù', 'cài', 'chá', 'chī', 'chū zū chē', 'dǎ diàn huà', 'dà', 'de', 'diǎn', 'diàn nǎo', 'diàn shì', 'diàn yǐng', 'dōng xi', 'dōu', 'dú', 'duì bu qǐ', 'duō', 'duō shao', 'ér zi', 'èr', 'fàn guǎn', 'fēi jī', 'fēn zhōng', 'gāo xìng', 'gè', 'gōng zuò', 'gǒu', 'hǎo', 'hē', 'hé', 'hěn', 'hòu mian', 'huí', 'huì', 'huǒ chē zhàn', 'jǐ', 'jiā', 'jiào', 'jīn tiān', 'jiǔ', 'kāi', 'kàn', 'kàn jiàn', 'kuài', 'lái', 'lǎo shī', 'le', 'lěng', 'lǐ', 'líng', 'liù', 'mā ma', 'ma', 'mǎi', 'māo', 'méi', 'méi guān xi', 'mǐ fàn', 'míng tiān', 'míng zi', 'nǎ', 'nà', 'ne', 'néng ', 'nǐ', 'nián', 'nǚ ér', 'péng you', 'piào liang', 'píng guǒ', 'qī', 'qián', 'qián miàn', 'qǐng', 'qù', 'rè', 'rén', 'rèn shi', 'rì', 'sān', 'shāng diàn', 'shàng', 'shàng wǔ', 'shǎo', 'shéi', 'shén me?', 'shí', 'shí hou', 'shì', 'shū', 'shuǐ', 'shuǐ guǒ', 'shuì jiào', 'shuō huà', 'sì', 'suì', 'tā', 'tā', 'tài', 'tiān qì', 'tīng', 'tóng xué', 'wèi,', 'wǒ', 'wǒ men', 'wǔ', 'xǐ huan', 'xià', 'xià wǔ', 'xià yǔ', 'xiān sheng', 'xiàn zài', 'xiǎng', 'xiǎo', 'xiǎo jie', 'xiē', 'xiě', 'xiè xie', 'xīng qī', 'xué sheng', 'xué xí', 'xué xiào', 'yī', 'yī fu', 'yī shēng', 'yī yuàn', 'yǐ zi', 'yǒu', 'yuè', 'zài', 'zài jiàn', 'zěn me yàng', 'zhè', 'zhōng guó', 'zhōng wǔ', 'zhù', 'zhuō zi', 'zì', 'zuó', 'tiān', 'zuò', 'zuò'];
+
+  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+  //                                                                          //
+  //                             DICTIONARY                                    //
+  //                                                                          //
+  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
 
   // Creating Form:
   let $form = $('<form>')
@@ -31,34 +42,18 @@ $(() => {
                     $(event.currentTarget).val('')
                   })
                 .keydown((event) => {
-                  // http://www.w3schools.com/jsref/event_key_code.asp
                   if(event.code === 'Enter') {
-                    $characterInfoContainer.children().detach()
-                    captureUserInput(); // captures the user input and saves it to $userInput
-                    console.log(`user input is ${$userInput}`); // In case user inputs several characters
-                    charArray = $userInput.split(''); // splitting input into array
-                    for (let index in charArray) {
-                      if(charArray[index] !== ' ') {
-                        $(callDictionaryData(charArray[index]));
-                      }
-                    }
+                    enterInput(event)
                   }
                 })
+
+
 
 
   //TODO//TODO// Create mobile-friendly click button
   let $inputButton = $('<button>')
                       .on('click', (event) => {
-                        event.preventDefault();
-                        $characterInfoContainer.children().detach()
-                        $userInput = $('#inputField').val();
-                        console.log(`user input is ${$userInput}`);
-                        charArray = $userInput.split('');
-                        for (let index in charArray) {
-                          if(charArray[index] !== ' ') {
-                            $(callDictionaryData(charArray[index]));
-                          }
-                        }
+                        enterInput(event)
                       })
                       .addClass('mobile-button')
                       .text('GO')
@@ -76,6 +71,7 @@ $(() => {
 
   //zach~//~zach~//~zach~//   SETTING UP FUNCTIONALITY   //~zach~//~zach~//~zach
 
+
   // Save and reset input field on ENTER
   const captureUserInput = () => {
     event.preventDefault(); // preventing page refresh
@@ -89,49 +85,40 @@ $(() => {
       url: `http://api.ctext.org/getcharacter?char=${input}`
     }).then(
       (data) => {
-        let charPinyin = data.char; // Set Pinyin of Character
+        let newChar = data.char; // Set Character
         let charPronunciation = data.readings.mandarinpinyin[0]; // Set Pronunciation of Character
         if (isDictionary){
-          setCharInformation(charPinyin, charPronunciation)
+          setCharInformation(newChar, charPronunciation)
         } else if (isFlashCards) {
           //////////////////////////////////////////////////////////////////////
-          constructFlashCardDeck(charPinyin, charPronunciation)
+          randomizePronunciation(hsk1)
+          constructFlashCardDeck(newChar, charPronunciation, pinyin1, pinyin2, pinyin3)
           ////////////////////////////////////////////////////////////////////////
         }
       }
     )
   }
 
-  const testFunction = () => {
-    console.log('TESTING!');
-  }
-
-
   // Displays Character information in flexbox form
-  const setCharInformation = (pinyin, pronunciation) => {
+  const setCharInformation = (character, pronunciation) => {
 
     // Create Character Container:
     // Container div
     let $newCharContainer = $('<div>').addClass('character-container')
 
     // Character Information
-    $('<a>').text(pinyin)
-      .addClass('pinyin')
+    $('<a>').text(character)
+      .addClass('simple-char')
       .appendTo($newCharContainer)
-      .attr({'href': `http://ctext.org/dictionary.pl?if=en&char=${pinyin}`, 'target': '_blank'})
+      .attr({'href': `http://ctext.org/dictionary.pl?if=en&char=${character}`, 'target': '_blank'})
     $('<a>').text(pronunciation)
       .addClass('pronunciation')
       .appendTo($newCharContainer)
-      .attr({'href': `http://ctext.org/dictionary.pl?if=en&char=${pinyin}`, 'target': '_blank'})
+      .attr({'href': `http://ctext.org/dictionary.pl?if=en&char=${character}`, 'target': '_blank'})
 
     // Appending to the info container
     $characterInfoContainer.append($newCharContainer)
   }
-
-
-
-
-
 
 
 
@@ -142,12 +129,23 @@ $(() => {
   //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
 
   let flashCardArray = []
+  let pinyin1
+  let pinyin2
+  let pinyin3
+
+  // Function that randomizes 3 of the random pronunciations for Flashcard
+  const randomizePronunciation = (array) => {
+    pinyin1 = array[Math.floor(Math.random() * array.length)];
+    pinyin2 = array[Math.floor(Math.random() * array.length)];
+    pinyin3 = array[Math.floor(Math.random() * array.length)];
+    return pinyin1, pinyin2, pinyin3
+  }
 
   class FlashCardSet {
-    constructor(targetChar, targetPronunciation) {
+    constructor(targetChar, targetPronunciation, pinyin1, pinyin2, pinyin3) {
       this.targetChar = targetChar;
       this.targetPronunciation = targetPronunciation;
-      this.randomPronunciation = [];
+      this.randomPronunciation = [pinyin1, pinyin2, pinyin3];
     }
 
     playset() {
@@ -155,9 +153,15 @@ $(() => {
     }
   }
 
+  // check text against target pronunciation
+  const checkPronunciation = (event) => {
+    if($(event.currentTarget).text() === currentDeckObject.targetPronunciation) {
+      console.log('its a match!');
+    }
+  }
 
   // Construct Flashcard Game for flashCardDeck[0]
-  const createDeckUI = (pinyin, pronunciation) => {
+  const createDeckUI = (character, pronunciation) => {
     currentDeckObject = flashCardDeck[0]
     console.log(currentDeckObject);
     // DIV CONTAINTING Game
@@ -165,31 +169,50 @@ $(() => {
       // DIV CONTAINING target
     let $targetContainer = $('<div>').addClass('target-container')
         // targetchar
-    let $targetChar = $('<div>').addClass('target-char')
+    let $targetChar = $('<div>').addClass('target-char').text(currentDeckObject.targetChar)
       // DIV CONTAINING random pronunciation x4
     let $randomCardContainer = $('<div>').addClass('random-card-container')
         // Random Pronunciation 1
-    let $randomCard1 = $('<div>').addClass('random-card')
+    let $randomCard1 = $('<div>')
+                        .addClass('random-card')
+                        .text(currentDeckObject.randomPronunciation[0])
+                        .on('click', (event) => {
+                          checkPronunciation(event)
+                        })
         // Random Pronunciation 2
-    let $randomCard2 = $('<div>').addClass('random-card')
+    let $randomCard2 = $('<div>')
+                        .addClass('random-card')
+                        .text(currentDeckObject.randomPronunciation[1])
+                        .on('click', (event) => {
+                          checkPronunciation(event)
+                        })
         // Random Pronunciation 3
-    let $randomCard3 = $('<div>').addClass('random-card')
-        // Random Pronunciation 4
-    let $randomCard4 = $('<div>').addClass('random-card')
+    let $randomCard3 = $('<div>')
+                        .addClass('random-card')
+                        .text(currentDeckObject.randomPronunciation[2])
+                        .on('click', (event) => {
+                          checkPronunciation(event)
+                        })
+
+    let $realCard = $('<div>')
+                        .addClass('random-card')
+                        .text(currentDeckObject.targetPronunciation)
+                        .on('click', (event) => {
+                          checkPronunciation(event)
+                        })
 
       // APPENDING
       $targetContainer.append($targetChar);
-      $randomCardContainer.append($randomCard1, $randomCard2, $randomCard3, $randomCard4)
+      $randomCardContainer.append($randomCard1, $randomCard2, $randomCard3, $realCard)
       $deckContainer.append($targetContainer, $randomCardContainer).appendTo('.app-container')
   }
 
 
-  const constructFlashCardDeck = (pinyin, pronunciation) => {
-    pronunciationArray.push(pronunciation)
-    let newFlashCardSet = new FlashCardSet(pinyin, pronunciation)
+  const constructFlashCardDeck = (character, pronunciation) => {
+    let newFlashCardSet = new FlashCardSet(character, pronunciation, pinyin1, pinyin2, pinyin3)
     flashCardDeck.push(newFlashCardSet)
     if (!currentDeckObject) {
-      createDeckUI(pinyin, pronunciation);
+      createDeckUI(character, pronunciation);
     }
     // Creating flashcards objects
     // Push flashcards to array
