@@ -83,7 +83,7 @@ $(() => {
 // Calls on the website to provide information based on userInput
   const callDictionaryData = (input) => {
     $.ajax({
-      url: `http://api.ctext.org/getcharacter?char=${input}`
+      url: `https://api.ctext.org/getcharacter?char=${input}`
     }).then(
       (data) => {
         let newChar = data.char; // Set Character
@@ -111,11 +111,11 @@ $(() => {
     $('<a>').text(character)
       .addClass('simple-char')
       .appendTo($newCharContainer)
-      .attr({'href': `http://ctext.org/dictionary.pl?if=en&char=${character}`, 'target': '_blank'})
+      .attr({'href': `https://ctext.org/dictionary.pl?if=en&char=${character}`, 'target': '_blank'})
     $('<a>').text(pronunciation)
       .addClass('pronunciation')
       .appendTo($newCharContainer)
-      .attr({'href': `http://ctext.org/dictionary.pl?if=en&char=${character}`, 'target': '_blank'})
+      .attr({'href': `https://ctext.org/dictionary.pl?if=en&char=${character}`, 'target': '_blank'})
 
     // Appending to the info container
     $characterInfoContainer.append($newCharContainer)
@@ -164,7 +164,7 @@ $(() => {
   }
 
 
-  // EXPLAIN HOW THIS WORKS - https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+  // EXPLAIN HOW THIS WORKS - httpss://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
