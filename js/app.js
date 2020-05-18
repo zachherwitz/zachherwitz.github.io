@@ -52,7 +52,7 @@ $(() => {
 
 
   //TODO//TODO// Create mobile-friendly click button
-  let $inputButton = $('<button>')
+  let $inputButton = $('<div>')
                       .on('click', (event) => {
                         enterInput(event)
                       })
@@ -68,7 +68,7 @@ $(() => {
                   // APPENDING // APPENDING // APPENDING // APPENDING //
 
   // Appending items to $form
-  $form.append($input, $sampleCharacters, $inputButton);
+  $form.append($inputButton, $input);
 
   //zach~//~zach~//~zach~//   SETTING UP FUNCTIONALITY   //~zach~//~zach~//~zach
 
@@ -266,6 +266,7 @@ $(() => {
     isDictionary = true;
     isFlashCards = false
     $('.app-container').children().detach()
+    $('.app-container').removeClass('flash-cards').addClass('dictionary')
     $characterInfoContainer.children().detach();
     console.log('booting dictionary');
     $input.val('')
@@ -276,6 +277,7 @@ $(() => {
     isDictionary = false;
     isFlashCards = true
     $('.app-container').children().detach()
+    $('.app-container').removeClass('dictionary').addClass('flash-cards')
     console.log('booting flashcards');
     $input.val('')
     $('.app-container').append($form);
