@@ -6,6 +6,7 @@ $(() => {
   const enterInput = (event) => {
     event.preventDefault();
     $characterInfoContainer.children().detach()
+    // $deckContainer.children().detach()
     $userInput = $('#inputField').val();
     console.log(`user input is ${$userInput}`);
     charArray = $userInput.split('');
@@ -128,7 +129,9 @@ $(() => {
   //                                                                          //
   //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
 
+
   let flashCardArray = []
+  let randomCardArray = []
   let pinyin1
   let pinyin2
   let pinyin3
@@ -159,6 +162,16 @@ $(() => {
       console.log('its a match!');
     }
   }
+
+
+  // EXPLAIN HOW THIS WORKS - https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
 
   // Construct Flashcard Game for flashCardDeck[0]
   const createDeckUI = (character, pronunciation) => {
@@ -201,10 +214,13 @@ $(() => {
                           checkPronunciation(event)
                         })
 
-      // APPENDING
-      $targetContainer.append($targetChar);
-      $randomCardContainer.append($randomCard1, $randomCard2, $randomCard3, $realCard)
-      $deckContainer.append($targetContainer, $randomCardContainer).appendTo('.app-container')
+    $randomCardArray = [$randomCard1, $randomCard2, $randomCard3, $realCard]
+    shuffleArray($randomCardArray)
+
+    // APPENDING
+    $targetContainer.append($targetChar);
+    $randomCardContainer.append($randomCardArray)
+    $deckContainer.append($targetContainer, $randomCardContainer).appendTo('.app-container')
   }
 
 
