@@ -17,13 +17,21 @@ $(() => {
     }
   }
 
+  // EXPLAIN HOW THIS WORKS - httpss://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
   // Creating Global variables
   let $userInput = '';
   let charArray = [];
   let flashCardDeck = [];
   let currentDeckObject;
 
-  let hsk1 = ['ài', 'bā', 'bà ba', 'bēi zi', 'Běi jīng', 'běn', 'bù kè qi', 'bù', 'cài', 'chá', 'chī', 'chū zū chē', 'dǎ diàn huà', 'dà', 'de', 'diǎn', 'diàn nǎo', 'diàn shì', 'diàn yǐng', 'dōng xi', 'dōu', 'dú', 'duì bu qǐ', 'duō', 'duō shao', 'ér zi', 'èr', 'fàn guǎn', 'fēi jī', 'fēn zhōng', 'gāo xìng', 'gè', 'gōng zuò', 'gǒu', 'hǎo', 'hē', 'hé', 'hěn', 'hòu mian', 'huí', 'huì', 'huǒ chē zhàn', 'jǐ', 'jiā', 'jiào', 'jīn tiān', 'jiǔ', 'kāi', 'kàn', 'kàn jiàn', 'kuài', 'lái', 'lǎo shī', 'le', 'lěng', 'lǐ', 'líng', 'liù', 'mā ma', 'ma', 'mǎi', 'māo', 'méi', 'méi guān xi', 'mǐ fàn', 'míng tiān', 'míng zi', 'nǎ', 'nà', 'ne', 'néng ', 'nǐ', 'nián', 'nǚ ér', 'péng you', 'piào liang', 'píng guǒ', 'qī', 'qián', 'qián miàn', 'qǐng', 'qù', 'rè', 'rén', 'rèn shi', 'rì', 'sān', 'shāng diàn', 'shàng', 'shàng wǔ', 'shǎo', 'shéi', 'shén me?', 'shí', 'shí hou', 'shì', 'shū', 'shuǐ', 'shuǐ guǒ', 'shuì jiào', 'shuō huà', 'sì', 'suì', 'tā', 'tā', 'tài', 'tiān qì', 'tīng', 'tóng xué', 'wèi,', 'wǒ', 'wǒ men', 'wǔ', 'xǐ huan', 'xià', 'xià wǔ', 'xià yǔ', 'xiān sheng', 'xiàn zài', 'xiǎng', 'xiǎo', 'xiǎo jie', 'xiē', 'xiě', 'xiè xie', 'xīng qī', 'xué sheng', 'xué xí', 'xué xiào', 'yī', 'yī fu', 'yī shēng', 'yī yuàn', 'yǐ zi', 'yǒu', 'yuè', 'zài', 'zài jiàn', 'zěn me yàng', 'zhè', 'zhōng guó', 'zhōng wǔ', 'zhù', 'zhuō zi', 'zì', 'zuó', 'tiān', 'zuò', 'zuò'];
+  let hsk1 = ['ài', 'bā', 'bà ba', 'bēi zi', 'Běi jīng', 'běn', 'bù kè qi', 'bù', 'cài', 'chá', 'chī', 'chū zū chē', 'dǎ diàn huà', 'dà', 'de', 'diǎn', 'diàn nǎo', 'diàn shì', 'diàn yǐng', 'dōng xi', 'dōu', 'dú', 'duì bu qǐ', 'duō', 'duō shao', 'ér zi', 'èr', 'fàn guǎn', 'fēi jī', 'fēn zhōng', 'gāo xìng', 'gè', 'gōng zuò', 'gǒu', 'hǎo', 'hē', 'hé', 'hěn', 'hòu mian', 'huí', 'huì', 'huǒ chē zhàn', 'jǐ', 'jiā', 'jiào', 'jīn tiān', 'jiǔ', 'kāi', 'kàn', 'kàn jiàn', 'kuài', 'lái', 'lǎo shī', 'le', 'lěng', 'lǐ', 'líng', 'liù', 'mā ma', 'ma', 'mǎi', 'māo', 'méi', 'méi guān xi', 'mǐ fàn', 'míng tiān', 'míng zi', 'nǎ', 'nà', 'ne', 'néng ', 'nǐ', 'nián', 'nǚ ér', 'péng you', 'piào liang', 'píng guǒ', 'qī', 'qián', 'qián miàn', 'qǐng', 'qù', 'rè', 'rén', 'rèn shi', 'rì', 'sān', 'shāng diàn', 'shàng', 'shàng wǔ', 'shǎo', 'shéi', 'shén me', 'shí', 'shí hou', 'shì', 'shū', 'shuǐ', 'shuǐ guǒ', 'shuì jiào', 'shuō huà', 'sì', 'suì', 'tā', 'tā', 'tài', 'tiān qì', 'tīng', 'tóng xué', 'wèi,', 'wǒ', 'wǒ men', 'wǔ', 'xǐ huan', 'xià', 'xià wǔ', 'xià yǔ', 'xiān sheng', 'xiàn zài', 'xiǎng', 'xiǎo', 'xiǎo jie', 'xiē', 'xiě', 'xiè xie', 'xīng qī', 'xué sheng', 'xué xí', 'xué xiào', 'yī', 'yī fu', 'yī shēng', 'yī yuàn', 'yǐ zi', 'yǒu', 'yuè', 'zài', 'zài jiàn', 'zěn me yàng', 'zhè', 'zhōng guó', 'zhōng wǔ', 'zhù', 'zhuō zi', 'zì', 'zuó', 'tiān', 'zuò', 'zuò'];
 
   //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
   //                                                                          //
@@ -128,7 +136,9 @@ $(() => {
       .attr({'href': `https://ctext.org/dictionary.pl?if=en&char=${character}`, 'target': '_blank'})
 
     // Appending to the info container
+    $newCharContainer.hide()
     $characterInfoContainer.append($newCharContainer)
+    $newCharContainer.fadeIn(1000)
   }
 
 
@@ -146,6 +156,12 @@ $(() => {
   let pinyin2;
   let pinyin3;
   let flashCardPoints = 0;
+  let $randomCardContainer;
+  let $randomCard1;
+  let $randomCard2;
+  let $randomCard3;
+  let $realCard;
+  let $targetChar;
 
   // Function that randomizes 3 of the random pronunciations for Flashcard
   const randomizePronunciation = (array) => {
@@ -167,60 +183,80 @@ $(() => {
     }
   }
 
+  // pull new set from deck
+  const pullNewSet = () => {
+    $targetChar.hide()
+    $randomCardContainer.hide().children().detach()
+
+
+    shuffleArray(flashCardDeck)
+    shuffleArray($randomCardArray)
+
+    currentDeckObject = flashCardDeck[0];
+
+    $targetChar.text(currentDeckObject.targetChar)
+    $randomCard1.text(currentDeckObject.randomPronunciation[0])
+    $randomCard2.text(currentDeckObject.randomPronunciation[1])
+    $randomCard3.text(currentDeckObject.randomPronunciation[2])
+    $realCard.text(currentDeckObject.targetPronunciation)
+
+    $randomCardContainer.append($randomCardArray);
+    $randomCardContainer.fadeIn(1000)
+    $targetChar.fadeIn(1000)
+
+  }
+
   // check text against target pronunciation
   const checkPronunciation = (event) => {
     if($(event.currentTarget).text() === currentDeckObject.targetPronunciation) {
-      console.log('its a match!');
       flashCardPoints++
       console.log(`it's a match! Points: ${flashCardPoints}`);
+      pullNewSet();
+    } else {
+      console.log(`it's not a match. Points: ${flashCardPoints}`);
+      pullNewSet();
     }
   }
 
-
-  // EXPLAIN HOW THIS WORKS - httpss://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
-  const shuffleArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
 
 
   // Construct Flashcard Game for flashCardDeck[0]
   const createDeckUI = (character, pronunciation) => {
+
     currentDeckObject = flashCardDeck[0]
+    console.log('creating deck ui' );
     console.log(currentDeckObject);
     // DIV CONTAINTING Game
     let $deckContainer = $('<div>').addClass('deck-container')
       // DIV CONTAINING target
     let $targetContainer = $('<div>').addClass('target-container')
         // targetchar
-    let $targetChar = $('<div>').addClass('target-char').text(currentDeckObject.targetChar)
+    $targetChar = $('<div>').addClass('target-char').text(currentDeckObject.targetChar)
       // DIV CONTAINING random pronunciation x4
-    let $randomCardContainer = $('<div>').addClass('random-card-container')
+    $randomCardContainer = $('<div>').addClass('random-card-container')
         // Random Pronunciation 1
-    let $randomCard1 = $('<div>')
+    $randomCard1 = $('<div>')
                         .addClass('random-card')
                         .text(currentDeckObject.randomPronunciation[0])
                         .on('click', (event) => {
                           checkPronunciation(event)
                         })
         // Random Pronunciation 2
-    let $randomCard2 = $('<div>')
+    $randomCard2 = $('<div>')
                         .addClass('random-card')
                         .text(currentDeckObject.randomPronunciation[1])
                         .on('click', (event) => {
                           checkPronunciation(event)
                         })
         // Random Pronunciation 3
-    let $randomCard3 = $('<div>')
+    $randomCard3 = $('<div>')
                         .addClass('random-card')
                         .text(currentDeckObject.randomPronunciation[2])
                         .on('click', (event) => {
                           checkPronunciation(event)
                         })
 
-    let $realCard = $('<div>')
+    $realCard = $('<div>')
                         .addClass('random-card')
                         .text(currentDeckObject.targetPronunciation)
                         .on('click', (event) => {
@@ -234,7 +270,9 @@ $(() => {
     $targetContainer.append($targetChar);
     $randomCardContainer.append($randomCardArray);
     $deckContainer.append($targetContainer, $randomCardContainer);
-    $('.app-container').append($deckContainer);
+    $deckContainer.hide();
+    $('.app-container').append($deckContainer)
+    $deckContainer.fadeIn(1000);
   }
 
 
@@ -284,17 +322,24 @@ $(() => {
     $characterInfoContainer.children().detach();
     console.log('booting dictionary');
     $input.val('')
-    $('.app-container').append($form, $characterInfoContainer) // add final appended items here!
+    $form.hide()
+    $characterInfoContainer.hide()
+    $('.app-container').append($form, $characterInfoContainer)
+    $form.fadeIn(1000)
+    $characterInfoContainer.fadeIn(1000)
   }
 
   const setFlashCards = () => {
     isDictionary = false;
     isFlashCards = true
+    flashCardDeck = [];
     $('.app-container').children().detach()
     $('.app-container').removeClass('dictionary').addClass('flash-cards')
     console.log('booting flashcards');
     $input.val('')
-    $('.app-container').append($form);
+    $form.hide();
+    $('.app-container').append($form)
+    $form.fadeIn(1000);
   }
 
   $('#dictionary-app').on('click', setDictionary)

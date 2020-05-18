@@ -39,21 +39,23 @@ body {
 
 .nav-button {
   list-style: none;
-  color: white;
+  color: rgba(119, 119, 119, 0.3);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 3vh;
-  transition: 1.5s;
+  transition: 2s;
   background-color: rgba(255, 255, 255, 0);
   font-size: 1.2em;
-  font-weight: bold;
 }
 
 .nav-button:hover {
-  transition: 1.5s;
+  transition: 2s;
   background-color: rgba(255, 255, 255, .1);
   font-size: 1.3em;
+  font-weight: 400;
 }
 
 .app-container {
@@ -158,7 +160,7 @@ a {
 }
 
 .deck-container {
-  margin-top: 5vh;
+  margin-top: 1vh;
   /* border: 5px solid white; */
   display: flex;
   flex-direction: column;
@@ -172,8 +174,9 @@ a {
 }
 
 .target-char {
-  font-size: 10vw;
-  color: rgba(119, 119, 119, 0.3)
+  font-size: 15vw;
+  color: rgba(119, 119, 119, 0.3);
+  padding-bottom: 0;
 }
 
 .random-card-container {
@@ -190,6 +193,8 @@ a {
   margin: 1vw;
   font-size: 1.5vw;
   transition: 1.5s;
+  display: flex;
+  justify-content: center;
 }
 
 .random-card:hover {
