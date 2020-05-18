@@ -48,12 +48,13 @@ body {
   justify-content: center;
   align-items: center;
   padding: 3vh;
-  transition: 1.3s;
+
   background-color: rgba(255, 255, 255, 0);
   font-size: 1.2em;
 }
 
 .nav-button:hover {
+  transition: 1.3s;
   background-color: rgba(255, 255, 255, .2);
   font-size: 1.5em;
 }
