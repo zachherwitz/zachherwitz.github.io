@@ -2,16 +2,16 @@ body {
   display: flex;
   justify-content: center;
   /* Photo by 五玄土 ORIENTO on Unsplash */
-  background-image: url('../images/background.jpg');
+  background-image: url('../images/background-mobile.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-@media (max-width:800px) {
+@media (min-width:800px) {
   body {
     /* Photo by Sarah Dorweiler on Unsplash */
-    background-image: url('../images/background-mobile.jpg');
+    background-image: url('../images/background.jpg');
   }
 }
 
