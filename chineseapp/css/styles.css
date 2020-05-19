@@ -220,8 +220,48 @@ a {
     background-position: center;
   }
 
+  .mobile-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.5);
+    width: 10vw;
+    height: 90%;
+  }
+
   .character-info-container {
     /* Photo by Sarah Dorweiler on Unsplash */
     background-color: rgba(255, 255, 255, 0.9)
+  }
+
+  .deck-container {
+    margin: 0 auto;
+    /* border: 5px solid white; */
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 45vw;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .target-char {
+    font-size: 30vw;
+    color: rgba(119, 119, 119, 0.8);
+  }
+
+  .random-card {
+    /* border: 2px solid black; */
+    color: rgba(119, 119, 119, 0.8);
+    padding: 1vw;
+    margin: .5vw;
+    font-size: 6vw;
+    display: flex;
+    justify-content: center;
+  }
+
+  .random-card:hover {
+    font-size: 6vw;
   }
 }
