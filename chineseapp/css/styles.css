@@ -8,13 +8,6 @@ body {
   background-position: center;
 }
 
-@media screen and (max-width: 600px) {
-  body {
-    /* Photo by Sarah Dorweiler on Unsplash */
-    background-image: url('../images/background-mobile.jpg');
-  }
-}
-
 .site-container {
   width: 80%;
   height: 100vh;
@@ -41,7 +34,7 @@ body {
   list-style: none;
   color: rgba(219, 38, 38, 0.5);
   font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
+  font-weight: 800;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,13 +118,6 @@ a {
   background-color: rgba(255, 255, 255, 0.3)
 }
 
-@media (max-width:400px) {
-  .character-info-container {
-    /* Photo by Sarah Dorweiler on Unsplash */
-    background-color: rgba(255, 255, 255, 0.9)
-  }
-}
-
 .character-container {
   display: flex;
   flex-direction: column;
@@ -211,6 +197,31 @@ a {
 
 .random-card:hover {
   font-size: 2vw;
-  color: rgba(119, 119, 119, 0.6);
+  color: rgba(119, 119, 119, 1);
   transition: 1.5s;
+}
+
+
+/* //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+//                                                                             //
+//                              MEDIA QUERIES                                  //
+//                                                                             //
+//zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach */
+
+
+@media (max-width: 600px) {
+  body {
+    display: flex;
+    justify-content: center;
+    /* Photo by Sarah Dorweiler on Unsplash */
+    background-image: url('../images/background-mobile.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .character-info-container {
+    /* Photo by Sarah Dorweiler on Unsplash */
+    background-color: rgba(255, 255, 255, 0.9)
+  }
 }
