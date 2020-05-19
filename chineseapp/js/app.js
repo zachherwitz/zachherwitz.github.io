@@ -4,24 +4,23 @@ $(() => {
 
   // Function that is called when you submit your input
   const enterInput = (event) => {
-    event.preventDefault();
-    $characterInfoContainer.children().detach()
-    // $deckContainer.children().detach()
-    $userInput = $('#inputField').val();
-    console.log(`user input is ${$userInput}`);
-    charArray = $userInput.split('');
-    for (let index in charArray) {
-      if(charArray[index] !== ' ') {
-        $(callDictionaryData(charArray[index]));
+    event.preventDefault(); // Prevents Default Event Functionality
+    $characterInfoContainer.children().detach() // Resets App Space
+    $userInput = $('#inputField').val(); // Sets the $userInput variable to the string in the #inputField field
+    console.log(`user input is ${$userInput}`); // Logs user input
+    charArray = $userInput.split(''); // Split the input string into an array called charArray
+    for (let index in charArray) { // For each character in the array, do the following:
+      if(charArray[index] !== ' ') { // If the character is a space, do nothing. Otherwise:
+        $(callDictionaryData(charArray[index])); // Invoke the callDictionaryData function on each character
       }
     }
   }
 
-  // EXPLAIN HOW THIS WORKS - httpss://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+  // Fisher Yates Shuffle https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
   const shuffleArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+    for (let i = array.length - 1; i > 0; i--) { // For the number of indexes in the Array, let [i] equal the last item of the array. After each iteration, move to the next-last index.
+      let j = Math.floor(Math.random() * (i + 1)); // For each index of the Array, create a random number that [i] will swap with (this is [j])
+      [array[i], array[j]] = [array[j], array[i]]; //  Switch the values of Array[i] and Array[j]
     }
   }
 
@@ -31,13 +30,10 @@ $(() => {
   let flashCardDeck = [];
   let currentDeckObject;
 
-  let hsk1 = ['ài', 'bā', 'bà ba', 'bēi zi', 'Běi jīng', 'běn', 'bù kè qi', 'bù', 'cài', 'chá', 'chī', 'chū zū chē', 'dǎ diàn huà', 'dà', 'de', 'diǎn', 'diàn nǎo', 'diàn shì', 'diàn yǐng', 'dōng xi', 'dōu', 'dú', 'duì bu qǐ', 'duō', 'duō shao', 'ér zi', 'èr', 'fàn guǎn', 'fēi jī', 'fēn zhōng', 'gāo xìng', 'gè', 'gōng zuò', 'gǒu', 'hǎo', 'hē', 'hé', 'hěn', 'hòu mian', 'huí', 'huì', 'huǒ chē zhàn', 'jǐ', 'jiā', 'jiào', 'jīn tiān', 'jiǔ', 'kāi', 'kàn', 'kàn jiàn', 'kuài', 'lái', 'lǎo shī', 'le', 'lěng', 'lǐ', 'líng', 'liù', 'mā ma', 'ma', 'mǎi', 'māo', 'méi', 'méi guān xi', 'mǐ fàn', 'míng tiān', 'míng zi', 'nǎ', 'nà', 'ne', 'néng ', 'nǐ', 'nián', 'nǚ ér', 'péng you', 'piào liang', 'píng guǒ', 'qī', 'qián', 'qián miàn', 'qǐng', 'qù', 'rè', 'rén', 'rèn shi', 'rì', 'sān', 'shāng diàn', 'shàng', 'shàng wǔ', 'shǎo', 'shéi', 'shén me', 'shí', 'shí hou', 'shì', 'shū', 'shuǐ', 'shuǐ guǒ', 'shuì jiào', 'shuō huà', 'sì', 'suì', 'tā', 'tā', 'tài', 'tiān qì', 'tīng', 'tóng xué', 'wèi', 'wǒ', 'wǒ men', 'wǔ', 'xǐ huan', 'xià', 'xià wǔ', 'xià yǔ', 'xiān sheng', 'xiàn zài', 'xiǎng', 'xiǎo', 'xiǎo jie', 'xiē', 'xiě', 'xiè xie', 'xīng qī', 'xué sheng', 'xué xí', 'xué xiào', 'yī', 'yī fu', 'yī shēng', 'yī yuàn', 'yǐ zi', 'yǒu', 'yuè', 'zài', 'zài jiàn', 'zěn me yàng', 'zhè', 'zhōng guó', 'zhōng wǔ', 'zhù', 'zhuō zi', 'zì', 'zuó', 'tiān', 'zuò', 'zuò'];
 
-  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
-  //                                                                          //
-  //                             DICTIONARY                                    //
-  //                                                                          //
-  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+  // Array of HSK1 Pronunciations (HSK are levels of Chinese proficiency testing, HSK1 being the first level, and these being the vocab words for that test)
+  // TODO:: Create a way to import your own sets of flashcards using CSV?
+  let hsk1 = ['ài', 'bā', 'bà ba', 'bēi zi', 'Běi jīng', 'běn', 'bù kè qi', 'bù', 'cài', 'chá', 'chī', 'chū zū chē', 'dǎ diàn huà', 'dà', 'de', 'diǎn', 'diàn nǎo', 'diàn shì', 'diàn yǐng', 'dōng xi', 'dōu', 'dú', 'duì bu qǐ', 'duō', 'duō shao', 'ér zi', 'èr', 'fàn guǎn', 'fēi jī', 'fēn zhōng', 'gāo xìng', 'gè', 'gōng zuò', 'gǒu', 'hǎo', 'hē', 'hé', 'hěn', 'hòu mian', 'huí', 'huì', 'huǒ chē zhàn', 'jǐ', 'jiā', 'jiào', 'jīn tiān', 'jiǔ', 'kāi', 'kàn', 'kàn jiàn', 'kuài', 'lái', 'lǎo shī', 'le', 'lěng', 'lǐ', 'líng', 'liù', 'mā ma', 'ma', 'mǎi', 'māo', 'méi', 'méi guān xi', 'mǐ fàn', 'míng tiān', 'míng zi', 'nǎ', 'nà', 'ne', 'néng ', 'nǐ', 'nián', 'nǚ ér', 'péng you', 'piào liang', 'píng guǒ', 'qī', 'qián', 'qián miàn', 'qǐng', 'qù', 'rè', 'rén', 'rèn shi', 'rì', 'sān', 'shāng diàn', 'shàng', 'shàng wǔ', 'shǎo', 'shéi', 'shén me', 'shí', 'shí hou', 'shì', 'shū', 'shuǐ', 'shuǐ guǒ', 'shuì jiào', 'shuō huà', 'sì', 'suì', 'tā', 'tā', 'tài', 'tiān qì', 'tīng', 'tóng xué', 'wèi', 'wǒ', 'wǒ men', 'wǔ', 'xǐ huan', 'xià', 'xià wǔ', 'xià yǔ', 'xiān sheng', 'xiàn zài', 'xiǎng', 'xiǎo', 'xiǎo jie', 'xiē', 'xiě', 'xiè xie', 'xīng qī', 'xué sheng', 'xué xí', 'xué xiào', 'yī', 'yī fu', 'yī shēng', 'yī yuàn', 'yǐ zi', 'yǒu', 'yuè', 'zài', 'zài jiàn', 'zěn me yàng', 'zhè', 'zhōng guó', 'zhōng wǔ', 'zhù', 'zhuō zi', 'zì', 'zuó', 'tiān', 'zuò', 'zuò'];
 
   // Creating Form:
   let $form = $('<form>')
@@ -54,7 +50,7 @@ $(() => {
                 })
                 .click(
                   (event) => {
-                    event.preventDefault()
+                    event.preventDefault() // Prevents Default Event Functionality // preventing page refresh
                     $(event.currentTarget).val('')
                   })
                 .keydown((event) => {
@@ -93,7 +89,7 @@ $(() => {
 
   // Save and reset input field on ENTER
   const captureUserInput = () => {
-    event.preventDefault(); // preventing page refresh
+    event.preventDefault(); // Prevents Default Event Functionality // preventing page refresh
     $userInput = $(event.currentTarget).val(); // saving user input to variable
     $(event.currentTarget).val('') // clearing user input field;
   }
@@ -317,21 +313,6 @@ $(() => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
   //                                                                          //
   //                             APP BUTTONS                                  //
@@ -340,53 +321,57 @@ $(() => {
 
 
   const setDictionary = () => {
-    isDictionary = true;
-    isFlashCards = false
-    $('.app-container').children().detach()
-    $('.app-container').removeClass('flash-cards').addClass('dictionary')
+    isDictionary = true; // Boolean that determines which app has been selected
+    isFlashCards = false // Boolean that determines which app has been selected
+    $('.app-container').children().detach() // Resets the App Space
+    $('.app-container').removeClass('flash-cards').addClass('dictionary') // Switches App Class
     $characterInfoContainer.children().detach();
     console.log('booting dictionary');
-    $input.val('')
-    $form.hide()
-    $characterInfoContainer.hide()
-    $('.app-container').append($form, $characterInfoContainer)
-    $form.fadeIn(1000)
-    $characterInfoContainer.fadeIn(1000)
+    $input.val('') // Resets form Input Value
+    $form.hide() // Hides Form
+    $characterInfoContainer.hide() // Hides Character Info Contaier
+    $('.app-container').append($form, $characterInfoContainer) // Appends Form and Container to App Space
+    $form.fadeIn(1000) // Fades in the App at 1000ms
+    $characterInfoContainer.fadeIn(1000) // Fades in the Character Info at 1000ms
   }
 
   const setFlashCards = () => {
-    isDictionary = false;
-    isFlashCards = true
-    flashCardDeck = [];
-    $('.app-container').children().detach()
-    $('.app-container').removeClass('dictionary').addClass('flash-cards')
+    isDictionary = false; // Boolean that determines which app has been selected
+    isFlashCards = true // Boolean that determines which app has been selected
+    flashCardDeck = []; // Resets Flash Card Deck
+    $('.app-container').children().detach() // Resets the App Space
+    $('.app-container').removeClass('dictionary').addClass('flash-cards') // Switches App Class
     console.log('booting flashcards');
-    $input.val('')
-    $form.hide();
-    $('.app-container').append($form)
-    $form.fadeIn(1000);
+    $input.val('')  // Resets form Input Value
+    $form.hide(); // Hides Form
+    $('.app-container').append($form) // Appends the Form to the App Space
+    $form.fadeIn(1000);  // Fades in the App at 1000ms
   }
 
-  $('#dictionary-app').on('click', setDictionary)
-  $('#flashcards-app').on('click', setFlashCards)
+  $('#dictionary-app').on('click', setDictionary) // Sets Dictionary button onclick
+  $('#flashcards-app').on('click', setFlashCards) // Sets Flash Cards button onclick
 
 })
 
+
+// DRAG AND DROP FUNCTIONALITY:
 //https://www.w3schools.com/html/html5_draganddrop.asp
-// EXPLAIN HOW THIS WORKS
+
+// Signals that nothing should happen while the element is being dragged - only once it is dropped
 const allowDrop = (event) => {
-  event.preventDefault();
+  event.preventDefault(); // Prevents Default Event Functionality
 }
 
 // Create a function called 'drag'. Drag uses the dataTransfer
 const drag = (event) => {
   console.log('drag start');
-  event.dataTransfer.setData('dev', 'devdrag');
+  event.dataTransfer.setData('dev', 'devdrag'); // Set the event's data to 'devdrag'
 }
 
+// Function occurs when draggable element is dragged over the current element, and then let go.  
 const drop = (event) => {
-  event.preventDefault();
-  if(event.dataTransfer.getData('dev') == 'devdrag') {
-    $('#inputField').val('你好吗我叫咋吃我是学生').focus();
+  event.preventDefault(); // Prevents Default Event Functionality
+  if(event.dataTransfer.getData('dev') == 'devdrag') { // If the event's data is 'devdrag', do the following:
+    $('#inputField').val('你好吗我叫咋吃我是学生').focus(); // Input field's input is changed and focused
   }
 }
