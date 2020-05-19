@@ -289,7 +289,7 @@ $(() => {
                         })
 
     $randomCardArray = [$randomCard1, $randomCard2, $randomCard3, $realCard]
-    shuffleArray($randomCardArray)
+    // shuffleArray($randomCardArray)
 
     // APPENDING
     $targetContainer.append($targetChar);
