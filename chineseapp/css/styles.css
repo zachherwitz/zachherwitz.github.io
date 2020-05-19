@@ -2,16 +2,16 @@ body {
   display: flex;
   justify-content: center;
   /* Photo by 五玄土 ORIENTO on Unsplash */
-  background-image: url('../images/background-mobile.jpg');
+  background-image: url('../images/background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-@media (min-width:800px) {
+@media screen and (max-width: 600px) {
   body {
     /* Photo by Sarah Dorweiler on Unsplash */
-    background-image: url('../images/background.jpg');
+    background-image: url('../images/background-mobile.jpg');
   }
 }
 
@@ -39,7 +39,7 @@ body {
 
 .nav-button {
   list-style: none;
-  color: rgba(119, 119, 119, 0.3);
+  color: rgba(219, 38, 38, 0.5);
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
   display: flex;
