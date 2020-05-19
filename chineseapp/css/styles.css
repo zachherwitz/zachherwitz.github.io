@@ -138,17 +138,28 @@ a {
   justify-content: center;
   align-items: center;
   margin: 20px;
+
+}
+
+.character-container:hover {
+
 }
 
 .simple-char {
   font-family: 'Noto Serif SC', serif;
-  color: rgba(0, 0, 0, .7);
+  color: rgba(0, 0, 0, 0.5);
   font-size: 5vw;
+  transition: 1.5s
+}
+
+.simple-char:hover {
+  font-size: 6vw;
+  transition: 1.5s
 }
 
 .pronunciation {
   font-family: 'Noto Serif SC', serif;
-  color: rgba(0, 0, 0, .7);
+  color: rgba(0, 0, 0, 0.5);
   font-size: 5vw;
 }
 
@@ -166,16 +177,23 @@ a {
   width: 15vw;
 }
 
+.match-registrar {
+  /* border: 2px solid green; */
+  display: flex;
+  justify-content: center;
+  color: rgba(119, 119, 119, 0.5);
+}
+
 .target-container {
   /* border: 2px solid green; */
   display: flex;
-  align-items: center;
+  padding: 0;
 }
 
 .target-char {
   font-size: 15vw;
   color: rgba(119, 119, 119, 0.5);
-  padding-bottom: 0;
+  padding: 0;
 }
 
 .random-card-container {
@@ -188,8 +206,8 @@ a {
 .random-card {
   /* border: 2px solid black; */
   color: rgba(119, 119, 119, 0.3);
-  padding: 0.5vw;
-  margin: 1vw;
+  padding: 1vw;
+  margin: .5vw;
   font-size: 1.5vw;
   transition: 1.5s;
   display: flex;

@@ -31,7 +31,7 @@ $(() => {
   let flashCardDeck = [];
   let currentDeckObject;
 
-  let hsk1 = ['ài', 'bā', 'bà ba', 'bēi zi', 'Běi jīng', 'běn', 'bù kè qi', 'bù', 'cài', 'chá', 'chī', 'chū zū chē', 'dǎ diàn huà', 'dà', 'de', 'diǎn', 'diàn nǎo', 'diàn shì', 'diàn yǐng', 'dōng xi', 'dōu', 'dú', 'duì bu qǐ', 'duō', 'duō shao', 'ér zi', 'èr', 'fàn guǎn', 'fēi jī', 'fēn zhōng', 'gāo xìng', 'gè', 'gōng zuò', 'gǒu', 'hǎo', 'hē', 'hé', 'hěn', 'hòu mian', 'huí', 'huì', 'huǒ chē zhàn', 'jǐ', 'jiā', 'jiào', 'jīn tiān', 'jiǔ', 'kāi', 'kàn', 'kàn jiàn', 'kuài', 'lái', 'lǎo shī', 'le', 'lěng', 'lǐ', 'líng', 'liù', 'mā ma', 'ma', 'mǎi', 'māo', 'méi', 'méi guān xi', 'mǐ fàn', 'míng tiān', 'míng zi', 'nǎ', 'nà', 'ne', 'néng ', 'nǐ', 'nián', 'nǚ ér', 'péng you', 'piào liang', 'píng guǒ', 'qī', 'qián', 'qián miàn', 'qǐng', 'qù', 'rè', 'rén', 'rèn shi', 'rì', 'sān', 'shāng diàn', 'shàng', 'shàng wǔ', 'shǎo', 'shéi', 'shén me', 'shí', 'shí hou', 'shì', 'shū', 'shuǐ', 'shuǐ guǒ', 'shuì jiào', 'shuō huà', 'sì', 'suì', 'tā', 'tā', 'tài', 'tiān qì', 'tīng', 'tóng xué', 'wèi,', 'wǒ', 'wǒ men', 'wǔ', 'xǐ huan', 'xià', 'xià wǔ', 'xià yǔ', 'xiān sheng', 'xiàn zài', 'xiǎng', 'xiǎo', 'xiǎo jie', 'xiē', 'xiě', 'xiè xie', 'xīng qī', 'xué sheng', 'xué xí', 'xué xiào', 'yī', 'yī fu', 'yī shēng', 'yī yuàn', 'yǐ zi', 'yǒu', 'yuè', 'zài', 'zài jiàn', 'zěn me yàng', 'zhè', 'zhōng guó', 'zhōng wǔ', 'zhù', 'zhuō zi', 'zì', 'zuó', 'tiān', 'zuò', 'zuò'];
+  let hsk1 = ['ài', 'bā', 'bà ba', 'bēi zi', 'Běi jīng', 'běn', 'bù kè qi', 'bù', 'cài', 'chá', 'chī', 'chū zū chē', 'dǎ diàn huà', 'dà', 'de', 'diǎn', 'diàn nǎo', 'diàn shì', 'diàn yǐng', 'dōng xi', 'dōu', 'dú', 'duì bu qǐ', 'duō', 'duō shao', 'ér zi', 'èr', 'fàn guǎn', 'fēi jī', 'fēn zhōng', 'gāo xìng', 'gè', 'gōng zuò', 'gǒu', 'hǎo', 'hē', 'hé', 'hěn', 'hòu mian', 'huí', 'huì', 'huǒ chē zhàn', 'jǐ', 'jiā', 'jiào', 'jīn tiān', 'jiǔ', 'kāi', 'kàn', 'kàn jiàn', 'kuài', 'lái', 'lǎo shī', 'le', 'lěng', 'lǐ', 'líng', 'liù', 'mā ma', 'ma', 'mǎi', 'māo', 'méi', 'méi guān xi', 'mǐ fàn', 'míng tiān', 'míng zi', 'nǎ', 'nà', 'ne', 'néng ', 'nǐ', 'nián', 'nǚ ér', 'péng you', 'piào liang', 'píng guǒ', 'qī', 'qián', 'qián miàn', 'qǐng', 'qù', 'rè', 'rén', 'rèn shi', 'rì', 'sān', 'shāng diàn', 'shàng', 'shàng wǔ', 'shǎo', 'shéi', 'shén me', 'shí', 'shí hou', 'shì', 'shū', 'shuǐ', 'shuǐ guǒ', 'shuì jiào', 'shuō huà', 'sì', 'suì', 'tā', 'tā', 'tài', 'tiān qì', 'tīng', 'tóng xué', 'wèi', 'wǒ', 'wǒ men', 'wǔ', 'xǐ huan', 'xià', 'xià wǔ', 'xià yǔ', 'xiān sheng', 'xiàn zài', 'xiǎng', 'xiǎo', 'xiǎo jie', 'xiē', 'xiě', 'xiè xie', 'xīng qī', 'xué sheng', 'xué xí', 'xué xiào', 'yī', 'yī fu', 'yī shēng', 'yī yuàn', 'yǐ zi', 'yǒu', 'yuè', 'zài', 'zài jiàn', 'zěn me yàng', 'zhè', 'zhōng guó', 'zhōng wǔ', 'zhù', 'zhuō zi', 'zì', 'zuó', 'tiān', 'zuò', 'zuò'];
 
   //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
   //                                                                          //
@@ -105,7 +105,7 @@ $(() => {
     }).then(
       (data) => {
         let newChar = data.char; // Set Character
-        let charPronunciation = data.readings.mandarinpinyin[0]; // Set Pronunciation of Character
+        let charPronunciation = data.readings.mandarinpinyin[0] || 'error' // Set Pronunciation of Character
         if (isDictionary){
           setCharInformation(newChar, charPronunciation)
         } else if (isFlashCards) {
@@ -162,6 +162,7 @@ $(() => {
   let $randomCard3;
   let $realCard;
   let $targetChar;
+  let $matchRegistrar;
 
   // Function that randomizes 3 of the random pronunciations for Flashcard
   const randomizePronunciation = (array) => {
@@ -206,14 +207,37 @@ $(() => {
 
   }
 
+  const registerMatch = (bool) => {
+    if(bool) {
+      flashCardPoints++
+      console.log(`it's a match! Points: ${flashCardPoints}`);
+      // $matchRegistrar.css('color', 'green');
+      setTimeout(() => {
+        $matchRegistrar.text(`Points: ${flashCardPoints}`)
+        // $matchRegistrar.css('color', 'black');
+      }, 200)
+      $matchRegistrar.fadeOut(100).fadeIn(400);
+    } else {
+      if(flashCardPoints >= 1) {
+        flashCardPoints--
+      }
+      console.log(`it's not a match. Points: ${flashCardPoints}`);
+      // $matchRegistrar.css('color', 'red');
+      setTimeout(() => {
+        $matchRegistrar.text(`Points: ${flashCardPoints}`)
+        // $matchRegistrar.css('color', 'black');
+      }, 200)
+      $matchRegistrar.fadeOut(100).fadeIn(400);
+    }
+  }
+
   // check text against target pronunciation
   const checkPronunciation = (event) => {
     if($(event.currentTarget).text() === currentDeckObject.targetPronunciation) {
-      flashCardPoints++
-      console.log(`it's a match! Points: ${flashCardPoints}`);
+      registerMatch(true)
       pullNewSet();
     } else {
-      console.log(`it's not a match. Points: ${flashCardPoints}`);
+      registerMatch(false)
       pullNewSet();
     }
   }
@@ -228,6 +252,7 @@ $(() => {
     console.log(currentDeckObject);
     // DIV CONTAINTING Game
     let $deckContainer = $('<div>').addClass('deck-container')
+    $matchRegistrar = $('<div>').addClass('match-registrar').text(`Points: ${flashCardPoints}`)
       // DIV CONTAINING target
     let $targetContainer = $('<div>').addClass('target-container')
         // targetchar
@@ -269,7 +294,7 @@ $(() => {
     // APPENDING
     $targetContainer.append($targetChar);
     $randomCardContainer.append($randomCardArray);
-    $deckContainer.append($targetContainer, $randomCardContainer);
+    $deckContainer.append($targetContainer, $matchRegistrar, $randomCardContainer);
     $deckContainer.hide();
     $('.app-container').append($deckContainer)
     $deckContainer.fadeIn(1000);
