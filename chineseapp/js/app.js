@@ -169,6 +169,7 @@ $(() => { // ON PAGE LOAD:
   let $realCard;
   let $targetChar;
   let $matchRegistrar;
+  let $deckContainer;
 
   // Function that randomizes 3 of the random pronunciations for Flashcard
   const randomizePronunciation = (array) => {
@@ -249,7 +250,7 @@ $(() => { // ON PAGE LOAD:
     console.log('creating deck ui' );
     console.log(currentDeckObject);
     // DIV CONTAINTING Game
-    let $deckContainer = $('<div>').addClass('deck-container')
+    $deckContainer = $('<div>').addClass('deck-container')
     $matchRegistrar = $('<div>').addClass('match-registrar').text(`Points: ${flashCardPoints}`)
       // DIV CONTAINING target
     let $targetContainer = $('<div>').addClass('target-container')
@@ -334,12 +335,14 @@ $(() => { // ON PAGE LOAD:
   const setFlashCards = () => {
     isDictionary = false; // Boolean that determines which app has been selected
     isFlashCards = true // Boolean that determines which app has been selected
-    flashCardDeck = []; // Resets Flash Card Deck
     $('.app-container').children().detach() // Resets the App Space
     $('.app-container').removeClass('dictionary').addClass('flash-cards') // Switches App Class
     console.log('booting flashcards');
     $input.val('')  // Resets form Input Value
     $form.hide(); // Hides Form
+    flashCardDeck = [];
+    currentDeckObject = '';
+    flashCardPoints = 0;
     $('.app-container').append($form) // Appends the Form to the App Space
     $form.fadeIn(1000);  // Fades in the App at 1000ms
   }
