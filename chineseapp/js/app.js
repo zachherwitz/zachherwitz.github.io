@@ -322,6 +322,8 @@ $(() => { // ON PAGE LOAD:
     isFlashCards = false // Boolean that determines which app has been selected
     $('.app-container').children().detach() // Resets the App Space
     $('.app-container').removeClass('flash-cards').addClass('dictionary') // Switches App Class
+    $('#flashcards-app').removeClass('current-app')
+    $('#dictionary-app').addClass('current-app')
     $characterInfoContainer.children().detach();
     console.log('booting dictionary');
     $input.val('') // Resets form Input Value
@@ -337,6 +339,8 @@ $(() => { // ON PAGE LOAD:
     isFlashCards = true // Boolean that determines which app has been selected
     $('.app-container').children().detach() // Resets the App Space
     $('.app-container').removeClass('dictionary').addClass('flash-cards') // Switches App Class
+    $('#dictionary-app').removeClass('current-app')
+    $('#flashcards-app').addClass('current-app')
     console.log('booting flashcards');
     $input.val('')  // Resets form Input Value
     $form.hide(); // Hides Form
