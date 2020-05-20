@@ -1,6 +1,10 @@
 README:
 
-The Chinese Dictionary is a sleek, minimalist app that takes a string of characters as an input, and returns data specific to the user's chosen app. The current functional apps are: Dictionary, FlashCards. The Chinese Dictionary is written with HTML, CSS, JavaScript and jQuery.
+The Chinese Dictionary is a sleek, minimalist app that takes a string of characters as an input, and returns data specific to the user's chosen app.
+
+The current functional apps are: Dictionary, FlashCards.
+
+The Chinese Dictionary is written with HTML, CSS, JavaScript and jQuery.
 
 Dictionary:
 The dictionary app takes in a string input and returns a link to a definition page, as well as the pinyin pronunciation.

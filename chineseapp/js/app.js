@@ -1,4 +1,11 @@
-$(() => {
+$(() => { // ON PAGE LOAD:
+
+  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+  //                                                                          //
+  //                  HTML ELEMENTS / JQEURY PAGE SETUP                       //
+  //                                                                          //
+  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+
 
   console.log('linked!');
 
@@ -51,11 +58,11 @@ $(() => {
                 .click(
                   (event) => {
                     event.preventDefault() // Prevents Default Event Functionality // preventing page refresh
-                    $(event.currentTarget).val('')
+                    $(event.currentTarget).val('') // Resets input field on click
                   })
                 .keydown((event) => {
-                  if(event.code === 'Enter') {
-                    enterInput(event)
+                  if(event.code === 'Enter') { // Checks to see if the button pressed is 'enter'
+                    enterInput(event) // Call enterInput with the event argument
                   }
                 })
 
@@ -79,12 +86,8 @@ $(() => {
   // Character Information Container
   let $characterInfoContainer = $('<div>').addClass('character-info-container')
 
-                  // APPENDING // APPENDING // APPENDING // APPENDING //
-
   // Appending items to $form
-  $form.append($inputButton, $input);
-
-  //zach~//~zach~//~zach~//   SETTING UP FUNCTIONALITY   //~zach~//~zach~//~zach
+  $form.append($inputButton, $input); // Append the input field and button to the form
 
 
   // Save and reset input field on ENTER
@@ -93,6 +96,15 @@ $(() => {
     $userInput = $(event.currentTarget).val(); // saving user input to variable
     $(event.currentTarget).val('') // clearing user input field;
   }
+
+
+  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+  //                                                                          //
+  //                             DICTIONARY                                   //
+  //                                                                          //
+  //zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach~//~zach
+
+
 
 // Calls on the website to provide information based on userInput
   const callDictionaryData = (input) => {
@@ -105,10 +117,8 @@ $(() => {
         if (isDictionary){
           setCharInformation(newChar, charPronunciation)
         } else if (isFlashCards) {
-          //////////////////////////////////////////////////////////////////////
           randomizePronunciation(hsk1)
           constructFlashCardDeck(newChar, charPronunciation, pinyin1, pinyin2, pinyin3)
-          ////////////////////////////////////////////////////////////////////////
         }
       }
     )
@@ -168,15 +178,12 @@ $(() => {
     return pinyin1, pinyin2, pinyin3
   }
 
+  // Class that determines the four values of each set of flashcards: the three random pinyin pronunciations and the correct pronunciation
   class FlashCardSet {
     constructor(targetChar, targetPronunciation, pinyin1, pinyin2, pinyin3) {
       this.targetChar = targetChar;
       this.targetPronunciation = targetPronunciation;
       this.randomPronunciation = [pinyin1, pinyin2, pinyin3];
-    }
-
-    playset() {
-      console.log(this.targetChar, this.pronunciation);
     }
   }
 
@@ -203,25 +210,22 @@ $(() => {
 
   }
 
+  // Takes a boolean argument that either increases or decreases score, and then adds animation to the score text
   const registerMatch = (bool) => {
     if(bool) {
       flashCardPoints++
       console.log(`it's a match! Points: ${flashCardPoints}`);
-      // $matchRegistrar.css('color', 'green');
       setTimeout(() => {
         $matchRegistrar.text(`Points: ${flashCardPoints}`)
-        // $matchRegistrar.css('color', 'black');
       }, 200)
       $matchRegistrar.fadeOut(100).fadeIn(400);
     } else {
-      if(flashCardPoints >= 1) {
+      if(flashCardPoints >= 1) { // Checks to make sure that you aren't already at score 0
         flashCardPoints--
       }
       console.log(`it's not a match. Points: ${flashCardPoints}`);
-      // $matchRegistrar.css('color', 'red');
       setTimeout(() => {
         $matchRegistrar.text(`Points: ${flashCardPoints}`)
-        // $matchRegistrar.css('color', 'black');
       }, 200)
       $matchRegistrar.fadeOut(100).fadeIn(400);
     }
@@ -230,7 +234,7 @@ $(() => {
   // check text against target pronunciation
   const checkPronunciation = (event) => {
     if($(event.currentTarget).text() === currentDeckObject.targetPronunciation) {
-      registerMatch(true)
+      registerMatch(true) // Calls registerMatch with the true argument, which increases the player's score and adds animation to the score text
       pullNewSet();
     } else {
       registerMatch(false)
@@ -238,12 +242,10 @@ $(() => {
     }
   }
 
-
-
   // Construct Flashcard Game for flashCardDeck[0]
   const createDeckUI = (character, pronunciation) => {
 
-    currentDeckObject = flashCardDeck[0]
+    currentDeckObject = flashCardDeck[0] // Pick a flashcard set from the deck and assign it to currentDeckObject
     console.log('creating deck ui' );
     console.log(currentDeckObject);
     // DIV CONTAINTING Game
@@ -260,28 +262,28 @@ $(() => {
                         .addClass('random-card')
                         .text(currentDeckObject.randomPronunciation[0])
                         .on('click', (event) => {
-                          checkPronunciation(event)
+                          checkPronunciation(event) // Adds click event that checks if this pronunciation is the same as the target cards'
                         })
         // Random Pronunciation 2
     $randomCard2 = $('<div>')
                         .addClass('random-card')
                         .text(currentDeckObject.randomPronunciation[1])
                         .on('click', (event) => {
-                          checkPronunciation(event)
+                          checkPronunciation(event) // Adds click event that checks if this pronunciation is the same as the target cards'
                         })
         // Random Pronunciation 3
     $randomCard3 = $('<div>')
                         .addClass('random-card')
                         .text(currentDeckObject.randomPronunciation[2])
                         .on('click', (event) => {
-                          checkPronunciation(event)
+                          checkPronunciation(event) // Adds click event that checks if this pronunciation is the same as the target cards'
                         })
 
     $realCard = $('<div>')
                         .addClass('random-card')
                         .text(currentDeckObject.targetPronunciation)
                         .on('click', (event) => {
-                          checkPronunciation(event)
+                          checkPronunciation(event) // Adds click event that checks if this pronunciation is the same as the target cards'
                         })
 
     $randomCardArray = [$randomCard1, $randomCard2, $randomCard3, $realCard]
@@ -303,12 +305,6 @@ $(() => {
     if (!currentDeckObject) {
       createDeckUI(character, pronunciation);
     }
-    // Creating flashcards objects
-    // Push flashcards to array
-    // create html and css structure of 1 card on top and then 4 cards to click at the bottom
-    // based on which object is chosen, populate data on the cards and assign click functions based on which is the right answer
-    // add a point somewhere based on how many you get correct
-
   }
 
 
@@ -368,7 +364,7 @@ const drag = (event) => {
   event.dataTransfer.setData('dev', 'devdrag'); // Set the event's data to 'devdrag'
 }
 
-// Function occurs when draggable element is dragged over the current element, and then let go.  
+// Function occurs when draggable element is dragged over the current element, and then let go.
 const drop = (event) => {
   event.preventDefault(); // Prevents Default Event Functionality
   if(event.dataTransfer.getData('dev') == 'devdrag') { // If the event's data is 'devdrag', do the following:

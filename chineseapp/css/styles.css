@@ -190,7 +190,7 @@ a {
 .random-card {
   /* border: 2px solid black; */
   color: rgba(119, 119, 119, 0.3);
-  padding: .5gvw;
+  padding: .5vw;
   margin: .5vw;
   font-size: 1.5vw;
   transition: 1.5s;
